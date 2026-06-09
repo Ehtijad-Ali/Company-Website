@@ -6,7 +6,7 @@ import fs from 'fs'
 const __dirname = path.dirname(new URL(import.meta.url).pathname).replace(/^\/([A-Z]:)/, '$1')
 
 export default defineConfig({
-  base: '/Company-webste/',
+  base: '/',
   plugins: [
     react(),
     {
