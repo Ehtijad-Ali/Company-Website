@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import { useContact } from '../context/ContactContext'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
+import { Sun, Moon, Menu, X, LogOut, Shield } from 'lucide-react'
 import CodeNodeLogo from './CodeNodeLogo'
 
 const LINKS = [
@@ -18,6 +19,7 @@ const LINKS = [
 export default function Navbar() {
   const { isDark, toggle } = useTheme()
   const { openContact } = useContact()
+  const { user, logout } = useAuth()
   const { pathname } = useLocation()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
@@ -91,6 +93,35 @@ export default function Navbar() {
             </AnimatePresence>
           </button>
 
+          {user ? (
+            <>
+              {user.is_admin && (
+                <Link to="/admin" className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium btn btn-secondary hover-scale micro-click">
+                  <Shield className="w-4 h-4" />
+                  Admin
+                </Link>
+              )}
+              <button
+                onClick={() => { logout(); setOpen(false) }}
+                className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:opacity-70"
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
+                title={`Logout ${user.username}`}
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="hidden md:flex btn btn-secondary btn-hover-micro micro-click text-sm">
+                Login
+              </Link>
+              <Link to="/register" className="hidden md:flex btn btn-primary btn-hover-micro micro-click text-sm">
+                Register
+              </Link>
+            </>
+          )}
+
           <button onClick={openContact} className="hidden md:flex btn btn-primary btn-hover-micro micro-click text-sm">
             Let's Talk
           </button>
@@ -124,7 +155,29 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-            <div className="p-4">
+            <div className="p-4 space-y-2">
+              {user ? (
+                <>
+                  {user.is_admin && (
+                    <Link to="/admin" onClick={() => setOpen(false)} className="btn btn-secondary w-full justify-center flex items-center gap-2">
+                      <Shield className="w-4 h-4" />
+                      Admin Panel
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => { logout(); setOpen(false) }}
+                    className="btn btn-secondary w-full justify-center flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" onClick={() => setOpen(false)} className="btn btn-secondary w-full justify-center">Login</Link>
+                  <Link to="/register" onClick={() => setOpen(false)} className="btn btn-primary w-full justify-center">Register</Link>
+                </>
+              )}
               <button onClick={() => { openContact(); setOpen(false) }} className="btn btn-primary w-full justify-center">Let's Talk</button>
             </div>
           </motion.div>

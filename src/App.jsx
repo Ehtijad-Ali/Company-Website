@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { ContactProvider } from './context/ContactContext'
+import { AuthProvider } from './context/AuthContext'
 import CustomCursor    from './components/CustomCursor'
 import ScrollProgress  from './components/ScrollProgress'
 import Loader          from './components/Loader'
 import Navbar          from './components/Navbar'
 import Footer          from './components/sections/Footer'
 import ContactModal    from './components/ContactModal'
+import ProtectedRoute  from './components/ProtectedRoute'
 
 import HomePage        from './pages/HomePage'
 import AboutPage       from './pages/AboutPage'
@@ -19,6 +21,9 @@ import PrivacyPage     from './pages/PrivacyPage'
 import TermsPage       from './pages/TermsPage'
 import CookiesPage     from './pages/CookiesPage'
 import SitemapPage     from './pages/SitemapPage'
+import LoginPage       from './pages/LoginPage'
+import RegisterPage    from './pages/RegisterPage'
+import AdminPage       from './pages/AdminPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -121,6 +126,9 @@ function AppContent() {
             <Route path="/terms"     element={<TermsPage />} />
             <Route path="/cookies"   element={<CookiesPage />} />
             <Route path="/sitemap"   element={<SitemapPage />} />
+            <Route path="/login"     element={<LoginPage />} />
+            <Route path="/register"  element={<RegisterPage />} />
+            <Route path="/admin"     element={<ProtectedRoute adminOnly><AdminPage /></ProtectedRoute>} />
             <Route path="/contact"   element={<Navigate to="/" replace />} />
             <Route path="*"          element={<HomePage />} />
           </Routes>
@@ -135,9 +143,11 @@ export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <ContactProvider>
-          <AppContent />
-        </ContactProvider>
+        <AuthProvider>
+          <ContactProvider>
+            <AppContent />
+          </ContactProvider>
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   )

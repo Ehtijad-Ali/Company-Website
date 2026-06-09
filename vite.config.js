@@ -5,8 +5,12 @@ import fs from 'fs'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname).replace(/^\/([A-Z]:)/, '$1')
 
+const isGitHubActions = Boolean(process.env.GITHUB_ACTIONS)
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')?.[1]
+const basePath = isGitHubActions && repoName ? `/${repoName}/` : '/'
+
 export default defineConfig({
-  base: '/',
+  base: basePath,
   plugins: [
     react(),
     {
