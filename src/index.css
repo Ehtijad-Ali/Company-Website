@@ -20,7 +20,8 @@
 @font-face {
   font-family: 'Nasalization';
   src: url('./fonts/Nasalization-Regular.ttf') format('truetype');
-  font-weight: 400 900;
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -327,7 +328,7 @@ html.dark {
 /* ─── Utilities ───────────────────────────────────────── */
 @layer utilities {
   .font-nasalization { font-family: 'Nasalization', 'Montserrat', sans-serif; }
-  .font-syne         { font-family: 'Nasalization', 'Montserrat', sans-serif; }
+  .font-syne         { font-family: 'Syne', 'Montserrat', sans-serif; }
   .font-mono         { font-family: 'JetBrains Mono', monospace; }
   .text-primary      { color: var(--text-primary); }
   .text-secondary    { color: var(--text-secondary); }
