@@ -1,0 +1,18 @@
+import React, { createContext, useContext, useState } from 'react'
+
+const ContactContext = createContext(null)
+
+export function ContactProvider({ children }) {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <ContactContext.Provider value={{
+      isOpen,
+      openContact:  () => setIsOpen(true),
+      closeContact: () => setIsOpen(false),
+    }}>
+      {children}
+    </ContactContext.Provider>
+  )
+}
+
+export const useContact = () => useContext(ContactContext)
