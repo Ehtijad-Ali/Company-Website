@@ -1,24 +1,37 @@
-﻿import React, { useRef } from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { ParallaxSection } from '../ui/AnimationKit'
+import SectionHeader from '../ui/SectionHeader'
+import { format } from '../../data/metrics'
 
 const E = [0.22, 1, 0.36, 1]
 
+/**
+ * Commitments, not adjectives. Each line names something a client could hold
+ * us to, which is the point of the list — "innovation-first" and
+ * "world-class engineering" were unfalsifiable and said nothing.
+ */
 const PILLARS = [
-  { n: '01', text: 'Innovation-first on every project'    },
-  { n: '02', text: 'Pixel-perfect design execution'       },
-  { n: '03', text: 'Performance-optimised from day one'   },
-  { n: '04', text: 'Transparent, agile collaboration'     },
-  { n: '05', text: 'Post-launch growth & support'         },
-  { n: '06', text: 'World-class engineering standards'    },
+  { n: '01', title: 'One team, no handoffs',      text: 'The people who design it are the people who build it.' },
+  { n: '02', title: 'Milestones up front',        text: "You know what lands when, before we start." },
+  { n: '03', title: 'Performance is a budget',    text: 'Core Web Vitals are set at kickoff, not measured at the end.' },
+  { n: '04', title: 'You own everything',         text: 'IP assignment in every contract. No exceptions.' },
+  { n: '05', title: '30-day warranty',            text: 'Every launch. Retainers after, if you want them.' },
+  { n: '06', title: "We'll tell you when we disagree", text: 'Including when the simpler, cheaper option is the right one.' },
 ]
 
-
+/**
+ * The manifesto panel used to repeat the hero headline word for word. Saying
+ * the same sentence twice on one page halves the weight of both, so this now
+ * carries the operating principle behind the headline instead.
+ */
 function ManifestoPanel({ inView }) {
-  const words = ['WE', 'BUILD', 'WHAT', 'OTHERS', 'ONLY', 'IMAGINE.']
-  const solid = [false, true, false, false, true, false]
+  const LINES = [
+    [{ t: 'Design and code' }],
+    [{ t: 'are the ' }, { t: 'same job', em: true }],
+    [{ t: 'done twice.' }],
+  ]
 
   return (
     <motion.div
@@ -29,177 +42,129 @@ function ManifestoPanel({ inView }) {
         position: 'relative',
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
-        borderRadius: 20,
+        borderRadius: 'var(--r-lg)',
         overflow: 'hidden',
-        padding: '3rem 2.5rem 2.5rem',
+        padding: '2.5rem 2.25rem 2rem',
         minHeight: 420,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        boxShadow: 'var(--e-1)',
       }}
     >
-      {/* Subtle radial glow */}
+      {/* Warm brand wash — was a purple that belonged to no palette here */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 80% 60% at 20% 110%, rgba(120,80,255,0.07), transparent)',
+        background: 'radial-gradient(ellipse 80% 60% at 15% 110%, var(--accent-glow), transparent 70%)',
       }} />
 
-      {/* Scan line */}
-      <motion.div
-        animate={{ y: ['0%', '100%'] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
-        style={{
-          position: 'absolute', left: 0, right: 0, height: 1,
-          background: 'linear-gradient(90deg, transparent, var(--border), transparent)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Top label */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
-        <span style={{
-          fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem',
-          letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-muted)',
-        }}>/ Manifesto</span>
-        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#34d399' }} />
+      <div className="flex items-center justify-between" style={{ marginBottom: '2rem', position: 'relative' }}>
+        <span className="eyebrow">Manifesto</span>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand)' }} />
       </div>
 
-      {/* Large statement */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.1em' }}>
-        {words.map((w, i) => (
-          <div key={w} style={{ overflow: 'hidden' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
+        {LINES.map((line, i) => (
+          <div key={i} style={{ overflow: 'hidden' }}>
             <motion.div
               initial={{ y: '110%' }}
               animate={inView ? { y: 0 } : {}}
-              transition={{ delay: 0.35 + i * 0.09, duration: 0.8, ease: E }}
+              transition={{ delay: 0.35 + i * 0.1, duration: 0.8, ease: E }}
               style={{
-                fontFamily: 'Nasalization, Montserrat, sans-serif',
-                fontWeight: 800,
-                fontSize: 'clamp(1.9rem, 3.8vw, 3.2rem)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                fontSize: 'clamp(1.75rem, 3.4vw, 2.75rem)',
                 letterSpacing: '-0.025em',
-                lineHeight: 1.05,
-                color: solid[i] ? 'var(--text-primary)' : 'transparent',
-                WebkitTextStroke: solid[i] ? undefined : '1px var(--border-hover, var(--border))',
+                lineHeight: 1.15,
+                color: 'var(--text-primary)',
+                paddingBottom: '0.04em',
               }}
-            >{w}</motion.div>
+            >
+              {line.map((p, pi) =>
+                p.em
+                  ? <em key={pi} style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>{p.t}</em>
+                  : <span key={pi}>{p.t}</span>
+              )}
+            </motion.div>
           </div>
         ))}
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.85, duration: 0.6 }}
+          style={{ fontSize: '0.9375rem', lineHeight: 1.7, color: 'var(--text-secondary)', marginTop: '1.5rem', maxWidth: '34ch' }}
+        >
+          Split them across two teams and you get a handoff, a translation
+          error, and a month of revisions. So we don't.
+        </motion.p>
       </div>
 
-      {/* Bottom row */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 1.1, duration: 0.6 }}
-        style={{
-          marginTop: '2.5rem',
-          paddingTop: '1.25rem',
-          borderTop: '1px solid var(--border)',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}
+        className="flex items-center justify-between"
+        style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border)', position: 'relative' }}
       >
-        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', letterSpacing: '0.2em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-          Est. 2014
-        </span>
-        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', letterSpacing: '0.2em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-          30+ Countries
-        </span>
+        <span className="eyebrow">Remote-first</span>
+        <span className="eyebrow">{format('countries')} countries served</span>
       </motion.div>
     </motion.div>
   )
 }
 
 export default function About() {
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section id="about" ref={ref} className="relative section" style={{ background: 'var(--bg-surface)' }}>
-
       <div className="container">
 
-        {/* ── Header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-14 flex items-start justify-between gap-8"
-        >
-          <div className="flex-1">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg mb-5"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--primary)' }} />
-              <span className="font-mono text-[10px] tracking-[0.28em] uppercase"
-                style={{ color: 'var(--text-secondary)' }}>About CodeNode</span>
-            </div>
+        <SectionHeader
+          num="02"
+          label="About"
+          title={[{ t: 'Engineers who design, designers who ' }, { t: 'ship', em: true }]}
+          subtitle={`A digital product studio bridging design and engineering for ambitious clients across ${format('countries')} countries.`}
+          action={{ to: '/about', label: 'More about us' }}
+          inView={inView}
+          className="mb-12"
+        />
 
-            <h2 className="section-title mb-4">Who We Are</h2>
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 xl:gap-14">
 
-            <p className="section-sub" style={{ maxWidth: '32rem' }}>
-              A full-stack digital powerhouse bridging stunning design and powerful
-              engineering — serving ambitious clients across 30+ countries.
-            </p>
-          </div>
-
-          {/* Watermark + founded pill */}
-          <div className="hidden lg:flex flex-col items-end gap-4 shrink-0">
-            <span
-              className="font-syne font-extrabold"
-              style={{ fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1, color: 'transparent',
-                       WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}
-            >02</span>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--primary)' }} />
-              <span className="font-mono text-[10px] tracking-widest uppercase"
-                style={{ color: 'var(--text-muted)' }}>Founded 2024 · New agency</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ── Two columns ── */}
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 xl:gap-14 mb-0">
-
-          {/* Left — manifesto */}
           <ManifestoPanel inView={inView} />
 
-          {/* Right — content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.85, delay: 0.15, ease: E }}
             className="flex flex-col justify-center"
           >
-            <p className="section-sub mb-10">
-              Every pixel we craft, every line of code we write — in service of one goal:
-              making your digital presence impossible to ignore.
+            <p className="section-sub mb-8">
+              Six things you can hold us to on every engagement.
             </p>
 
-            {/* Numbered pillars */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
+            <div style={{ borderTop: '1px solid var(--divider)' }}>
               {PILLARS.map((p, i) => (
                 <motion.div
                   key={p.n}
                   initial={{ opacity: 0, x: 16 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.07, duration: 0.5, ease: E }}
-                  className="group flex items-center gap-5 py-3.5"
-                  style={{ borderBottom: '1px solid var(--border)', cursor: 'default' }}
+                  className="flex items-baseline gap-4 py-3"
+                  style={{ borderBottom: '1px solid var(--divider)' }}
                 >
-                  <span style={{
-                    fontFamily: 'JetBrains Mono, monospace', fontSize: '0.58rem',
-                    letterSpacing: '0.12em', color: 'var(--text-muted)',
-                    transition: 'color 0.2s', width: '1.8rem', flexShrink: 0,
-                  }}
-                    className="group-hover:text-[var(--text-primary)]"
-                  >{p.n}</span>
-                  <div className="w-px h-3 shrink-0" style={{ background: 'var(--border)' }} />
-                  <span style={{
-                    fontSize: '0.82rem', color: 'var(--text-secondary)',
-                    transition: 'color 0.2s',
-                  }}
-                    className="group-hover:text-[var(--text-primary)]"
-                  >{p.text}</span>
+                  <span className="eyebrow shrink-0" style={{ width: '1.6rem', fontSize: '0.5625rem' }}>{p.n}</span>
+                  <div>
+                    <p style={{ fontSize: '0.9375rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                      {p.title}
+                    </p>
+                    <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.55, marginTop: '0.15rem' }}>
+                      {p.text}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -210,14 +175,13 @@ export default function About() {
               transition={{ delay: 0.9, duration: 0.5 }}
               className="mt-8"
             >
-              <Link to="/about" className="btn btn-primary btn-hover-micro micro-click hover-lift">
-                Learn More <ArrowRight className="w-4 h-4" />
+              <Link to="/contact" className="btn btn-primary micro-click">
+                Start a project <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </div>
-
     </section>
   )
 }

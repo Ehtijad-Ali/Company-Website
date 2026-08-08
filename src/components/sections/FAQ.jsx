@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import SectionHeader from '../ui/SectionHeader'
 import { Plus, Minus } from 'lucide-react'
 import { useContact } from '../../context/ContactContext'
 
@@ -72,28 +73,20 @@ export default function FAQ() {
     <section id="faq" ref={ref} className="section" style={{ background:'var(--bg)' }}>
       <div className="container">
 
-        {/* ── Header ── */}
-        <motion.div initial={{ opacity:0, y:20 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:.6 }}
-          className="mb-14 flex items-end justify-between">
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color:'var(--text-muted)' }}>/ FAQ</p>
-            <h2 className="section-title mb-4">Common Questions</h2>
-            <p className="section-sub mb-3">
-              Everything you need to know before we start building together.
-            </p>
-            <p className="text-sm" style={{ color:'var(--text-secondary)' }}>
-              Still have questions?{' '}
-              <button onClick={openContact} className="font-semibold underline underline-offset-2" style={{ color:'var(--accent)', background:'none', border:'none', cursor:'pointer', padding:0 }}>
-                Let's talk
-              </button>
-            </p>
-          </div>
-          <span
-            className="font-syne font-extrabold hidden lg:block shrink-0"
-            style={{ fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}
-          >09</span>
-        </motion.div>
+        <SectionHeader
+          num="09"
+          label="FAQ"
+          title={[{ t: 'The questions we get ' }, { t: 'before every project', em: true }]}
+          inView={inView}
+          className="mb-4"
+        />
+        <p className="text-sm mb-12" style={{ color: 'var(--text-secondary)' }}>
+          Still have questions?{' '}
+          <button onClick={openContact} className="underline underline-offset-2"
+            style={{ color: 'var(--brand)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontWeight: 500 }}>
+            Let's talk
+          </button>
+        </p>
 
         {/* ── Accordion ── */}
         <div className="space-y-3">

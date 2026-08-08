@@ -40,12 +40,13 @@ export default function Navbar() {
       className="fixed top-0 inset-x-0 z-50 px-4 py-4"
     >
       <div
-        className={`max-w-[1500px] mx-auto flex items-center justify-between px-5 py-3 rounded-2xl transition-all duration-400${scrolled ? ' navbar-blur' : ''}`}
+        className={`max-w-[1440px] mx-auto flex items-center justify-between px-5 py-3 transition-all duration-400${scrolled ? ' navbar-blur' : ''}`}
         style={{
-          background: scrolled ? 'var(--bg-card)' : 'transparent',
+          borderRadius: 'var(--r-lg)',
+          background: scrolled ? 'rgba(var(--bg-card-rgb), 0.82)' : 'transparent',
           border: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.10)' : 'none',
-          transition: 'background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease',
+          boxShadow: scrolled ? 'var(--e-2)' : 'none',
+          transition: 'background 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease)',
         }}
       >
         {/* Logo */}
@@ -61,18 +62,22 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className="relative px-4 py-2 rounded-xl text-sm font-medium transition-colors"
-                style={{ color: active ? 'var(--accent)' : 'var(--text-secondary)' }}
+                className="relative px-3.5 py-2 text-sm transition-colors"
+                style={{
+                  color: active ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  fontWeight: active ? 500 : 400,
+                }}
               >
+                {/* An underline reads as editorial where a pill reads as template */}
                 {active && (
                   <motion.span
-                    layoutId="nav-bg"
-                    className="absolute inset-0 rounded-xl"
-                    style={{ background: 'var(--accent-glow)', border: '1px solid var(--border)' }}
-                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                    layoutId="nav-underline"
+                    className="absolute left-3.5 right-3.5 -bottom-0.5"
+                    style={{ height: 1.5, background: 'var(--brand)', borderRadius: 2 }}
+                    transition={{ type: 'spring', bounce: 0.18, duration: 0.5 }}
                   />
                 )}
-                <span className="relative z-10">{label}</span>
+                {label}
               </Link>
             )
           })}
@@ -82,8 +87,8 @@ export default function Navbar() {
         <div className="flex items-center gap-2.5">
           <button
             onClick={toggle}
-            className="w-9 h-9 rounded-xl flex items-center justify-center hover-scale micro-click"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', transition: 'transform 0.25s ease, box-shadow 0.25s ease' }}
+            className="w-9 h-9 flex items-center justify-center hover-scale micro-click"
+            style={{ borderRadius: 'var(--r-md)', background: 'var(--bg-card)', border: '1px solid var(--border)', transition: 'transform 0.25s ease, box-shadow 0.25s ease' }}
           >
             <AnimatePresence mode="wait">
               {isDark
@@ -126,8 +131,8 @@ export default function Navbar() {
             Let's Talk
           </button>
 
-          <button onClick={() => setOpen(v => !v)} className="md:hidden w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+          <button onClick={() => setOpen(v => !v)} className="md:hidden w-9 h-9 flex items-center justify-center"
+            style={{ borderRadius: 'var(--r-md)', background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
             {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>

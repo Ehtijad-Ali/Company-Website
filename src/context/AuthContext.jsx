@@ -17,21 +17,53 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null)
   const [apiBase] = useState(getApiBase())
 
-  // Initialize auth state from localStorage
+  // Initialize auth state from localStorage and validate the token with the backend
   useEffect(() => {
     const token = localStorage.getItem('auth_token')
     const storedUser = localStorage.getItem('auth_user')
-    
-    if (token && storedUser) {
+
+    if (!token || !storedUser) {
+      setLoading(false)
+      return
+    }
+
+    try {
+      const parsedUser = JSON.parse(storedUser)
+      setUser(parsedUser)
+    } catch (e) {
+      localStorage.removeItem('auth_token')
+      localStorage.removeItem('auth_user')
+      setLoading(false)
+      return
+    }
+
+    const verifyToken = async () => {
       try {
-        setUser(JSON.parse(storedUser))
-      } catch (e) {
+        const response = await fetch(`${apiBase}/auth/me`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error('Invalid token')
+        }
+
+        const data = await response.json()
+        localStorage.setItem('auth_user', JSON.stringify(data.user))
+        setUser(data.user)
+      } catch (_err) {
         localStorage.removeItem('auth_token')
         localStorage.removeItem('auth_user')
+        setUser(null)
+      } finally {
+        setLoading(false)
       }
     }
-    setLoading(false)
-  }, [])
+
+    verifyToken()
+  }, [apiBase])
 
   const login = async (username, password) => {
     setError(null)

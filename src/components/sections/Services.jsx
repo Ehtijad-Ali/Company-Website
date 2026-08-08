@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Code2, Palette, Brain, Smartphone, BarChart3, Cloud, Shield, Zap, ArrowUpRight } from 'lucide-react'
 import { useContact } from '../../context/ContactContext'
+import SectionHeader from '../ui/SectionHeader'
 
 const SERVICES = [
   {
@@ -97,8 +98,8 @@ function ServiceRow({ s, i }) {
 
         {/* Title */}
         <h3 style={{
-          fontFamily: 'Nasalization, Montserrat, sans-serif',
-          fontWeight: 800, margin: 0, flex: 1,
+          fontFamily: 'var(--font-display)',
+          fontWeight: 500, margin: 0, flex: 1,
           fontSize: 'clamp(1.05rem, 2vw, 1.65rem)',
           letterSpacing: '-0.01em',
           color: 'var(--text-primary)',
@@ -143,8 +144,8 @@ function ServiceRow({ s, i }) {
           >
             <div style={{ paddingBottom: '1.875rem', paddingLeft: '7.7rem' }}>
               <p style={{
-                fontFamily: 'Nasalization, Montserrat, sans-serif',
-                fontSize: '0.9rem', lineHeight: 1.8,
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.9375rem', lineHeight: 1.75,
                 color: 'var(--text-secondary)', maxWidth: '40rem', marginBottom: '1rem',
               }}>{s.desc}</p>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -170,23 +171,15 @@ export default function Services() {
     <section id="services" ref={ref} className="section" style={{ background: 'var(--bg-surface)' }}>
       <div className="container">
 
-        {/* ── Header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-14 flex items-end justify-between"
-        >
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
-              style={{ color: 'var(--text-muted)' }}>/ 03 — Services</p>
-            <h2 className="section-title">What We Do</h2>
-          </div>
-          <span
-            className="font-syne font-extrabold hidden lg:block"
-            style={{ fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}
-          >03</span>
-        </motion.div>
+        <SectionHeader
+          num="03"
+          label="Services"
+          title={[{ t: 'Eight disciplines, ' }, { t: 'one team', em: true }]}
+          subtitle="Most engagements combine two or three — a platform build with the design and infrastructure that go around it."
+          action={{ to: '/services', label: 'All services' }}
+          inView={inView}
+          className="mb-12"
+        />
 
         {/* ── Service rows ── */}
         <div>

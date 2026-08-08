@@ -1,3 +1,12 @@
 node_modules
 dist/
 .vercel
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Stray SQLite db created when the server is run from the repo root
+# (the real one lives at server/auth.db)
+/auth.db

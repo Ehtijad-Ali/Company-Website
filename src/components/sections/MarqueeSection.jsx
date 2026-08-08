@@ -1,32 +1,38 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import SectionHeader from '../ui/SectionHeader'
+import { format } from '../../data/metrics'
 
+/* Sectors carry no brand colours of their own, so they step through the
+   palette's own ramp instead of a borrowed rainbow. */
 const ROW1 = [
-  { text: 'E-Commerce',  dot: '#F59E0B' },
-  { text: 'FinTech',     dot: '#3B82F6' },
-  { text: 'HealthTech',  dot: '#22C55E' },
-  { text: 'EdTech',      dot: '#A855F7' },
-  { text: 'SaaS',        dot: '#EF4444' },
-  { text: 'Enterprise',  dot: '#06B6D4' },
-  { text: 'Logistics',   dot: '#F97316' },
-  { text: 'MarTech',     dot: '#EC4899' },
-  { text: 'Gov Tech',    dot: '#84CC16' },
-  { text: 'Real Estate', dot: '#8B5CF6' },
-  { text: 'PropTech',    dot: '#14B8A6' },
-  { text: 'LegalTech',   dot: '#F59E0B' },
+  { text: 'E-Commerce',  dot: '#C96A4A' },
+  { text: 'FinTech',     dot: '#8C432C' },
+  { text: 'HealthTech',  dot: '#C9AC8C' },
+  { text: 'EdTech',      dot: '#D68667' },
+  { text: 'SaaS',        dot: '#AE563A' },
+  { text: 'Enterprise',  dot: '#A98C6D' },
+  { text: 'Logistics',   dot: '#E1A48C' },
+  { text: 'MarTech',     dot: '#6B3323' },
+  { text: 'Gov Tech',    dot: '#79604F' },
+  { text: 'Real Estate', dot: '#C96A4A' },
+  { text: 'PropTech',    dot: '#E0C8AC' },
+  { text: 'LegalTech',   dot: '#8C432C' },
 ]
 
+/* Technologies keep their real brand colours — that's the one place
+   outside hues are earned rather than decorative. */
 const ROW2 = [
   { text: 'React',       dot: '#61DAFB' },
-  { text: 'Next.js',     dot: '#ffffff' },
+  { text: 'Next.js',     dot: '#E0C8AC' },
   { text: 'Node.js',     dot: '#539E43' },
-  { text: 'Python',      dot: '#3178C6' },
+  { text: 'Python',      dot: '#3776AB' },
   { text: 'AWS',         dot: '#FF9900' },
   { text: 'TypeScript',  dot: '#3178C6' },
   { text: 'GraphQL',     dot: '#E10098' },
   { text: 'Docker',      dot: '#2496ED' },
   { text: 'PostgreSQL',  dot: '#336791' },
-  { text: 'AI / ML',     dot: '#A855F7' },
+  { text: 'AI / ML',     dot: '#C96A4A' },
   { text: 'Figma',       dot: '#F24E1E' },
   { text: 'Flutter',     dot: '#54C5F8' },
 ]
@@ -87,22 +93,12 @@ export default function MarqueeSection() {
         style={{ background: 'linear-gradient(-90deg, var(--bg-surface), transparent)' }} />
 
       <div className="container relative z-10 mb-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="flex items-end justify-between"
-        >
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
-              style={{ color: 'var(--text-muted)' }}>/ 06 — Reach</p>
-            <h2 className="section-title">Powering products<br />across every industry.</h2>
-          </div>
-          <span className="font-syne font-extrabold hidden lg:block"
-            style={{ fontSize: 'clamp(4rem,7vw,7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}>
-            06
-          </span>
-        </motion.div>
+        <SectionHeader
+          num="06"
+          label="Reach"
+          title={[{ t: 'Products shipped across ' }, { t: 'twelve industries', em: true }]}
+          inView={inView}
+        />
       </div>
 
       {/* Rows */}
@@ -127,10 +123,10 @@ export default function MarqueeSection() {
             No matter the domain — we've shipped production-ready software in it.
           </p>
           <div className="flex gap-6 shrink-0">
-            {[['12+', 'Industries'], ['18+', 'Countries'], ['60+', 'Clients']].map(([val, lbl]) => (
+            {[['industries', 'Industries'], ['countries', 'Countries'], ['projects', 'Projects']].map(([key, lbl]) => (
               <div key={lbl} className="text-center">
-                <p className="font-syne font-extrabold text-2xl leading-none"
-                  style={{ color: 'var(--text-primary)' }}>{val}</p>
+                <p className="tnum text-2xl leading-none"
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: 'var(--text-primary)' }}>{format(key)}</p>
                 <p className="font-mono text-[9px] uppercase tracking-widest mt-1"
                   style={{ color: 'var(--text-muted)' }}>{lbl}</p>
               </div>

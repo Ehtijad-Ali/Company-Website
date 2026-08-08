@@ -27,9 +27,9 @@ export default function CodeNodeLogo({ height = 30 }) {
         />
       </g>
 
-      {/* Mark overlay swoosh */}
+      {/* Mark overlay swoosh — the one place the brand colour lands in the wordmark */}
       <path
-        style={{ fill: 'var(--text-secondary)' }}
+        style={{ fill: 'var(--brand)' }}
         fillOpacity="1"
         fillRule="nonzero"
         d="M 189.824219 174.257812 L 189.824219 190.109375 C 189.824219 190.109375 176.105469 181.914062 156.558594 174.257812 C 156.558594 174.257812 176.222656 182.488281 196.910156 199.289062 L 196.910156 174.257812 Z"

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowUp, Send, Linkedin, Twitter, Github, Instagram, Dribbble } from 'lucide-react'
 import { useContact } from '../../context/ContactContext'
@@ -16,12 +16,17 @@ export default function Footer() {
   const [email, setEmail]         = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const { openContact } = useContact()
+  const { pathname } = useLocation()
+
+  /* Routes that already end with a dedicated CTA section — showing the footer
+     banner too would ask twice in a row. */
+  const hasOwnCTA = pathname === '/'
 
   return (
     <footer className="relative pt-20 pb-10" style={{ background:'var(--bg)', borderTop:'1px solid var(--border)' }}>
       <div className="container relative z-10">
-        {/* CTA Banner */}
-        <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
+        {/* CTA banner — suppressed on routes that close with their own CTA */}
+        {!hasOwnCTA && <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
           className="rounded-3xl p-10 md:p-14 mb-20 text-center overflow-hidden relative"
           style={{ background:'var(--bg-card)', border:'1px solid var(--border)' }}>
           <div className="pointer-events-none absolute inset-0 rounded-3xl overflow-hidden">
@@ -36,7 +41,7 @@ export default function Footer() {
             <button onClick={openContact} className="btn btn-primary">Start a Project</button>
             <Link to="/portfolio" className="btn btn-secondary">See Our Work</Link>
           </div>
-        </motion.div>
+        </motion.div>}
 
         {/* Footer grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
@@ -107,13 +112,13 @@ export default function Footer() {
       <div className="overflow-hidden mt-10 select-none pointer-events-none"
         style={{ paddingLeft: 'max(1.5rem, calc((100% - 1200px) / 2 + 1.5rem))', marginBottom: '-0.25rem' }}>
         <span style={{
-          fontFamily: 'Nasalization, Montserrat, sans-serif',
+          fontFamily: 'var(--font-display)',
           fontSize: 'clamp(80px, 17vw, 230px)',
-          fontWeight: 800,
-          letterSpacing: '-0.03em',
+          fontWeight: 500,
+          letterSpacing: '-0.045em',
           lineHeight: 0.88,
-          color: 'var(--bg-surface)',
-          WebkitTextStroke: '2px var(--border-hover)',
+          color: 'var(--text-primary)',
+          opacity: 0.05,
           display: 'block',
           whiteSpace: 'nowrap',
         }}>

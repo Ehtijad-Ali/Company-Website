@@ -7,6 +7,7 @@ import { apiClient } from '../services/apiClient'
 export default function AdminPanel() {
   const [users, setUsers] = useState([])
   const [logs, setLogs] = useState([])
+  const [interviews, setInterviews] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('users')
@@ -35,6 +36,10 @@ export default function AdminPanel() {
       // Load logs
       const logsData = await apiClient.admin.getLogs(token)
       setLogs(logsData.logs)
+
+      // Load interview requests
+      const interviewData = await apiClient.admin.getInterviews(token)
+      setInterviews(interviewData.requests)
     } catch (err) {
       setError(err.message || 'Failed to load admin data')
     } finally {
@@ -110,6 +115,17 @@ export default function AdminPanel() {
             }}
           >
             Admin Logs ({logs.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('interviews')}
+            className="px-4 py-3 font-medium text-sm transition-colors"
+            style={{
+              color: activeTab === 'interviews' ? 'var(--primary)' : 'var(--text-secondary)',
+              borderBottom: activeTab === 'interviews' ? `2px solid var(--primary)` : 'none',
+              marginBottom: '-1px'
+            }}
+          >
+            Interview Requests ({interviews.length})
           </button>
         </div>
 
@@ -197,6 +213,47 @@ export default function AdminPanel() {
                           {new Date(log.created_at).toLocaleDateString()}
                         </p>
                       </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {/* Interview Requests Tab */}
+            {activeTab === 'interviews' && (
+              <div className="space-y-3">
+                {interviews.length === 0 ? (
+                  <p style={{ color: 'var(--text-secondary)' }} className="text-center py-8">No interview requests yet</p>
+                ) : (
+                  interviews.map((r) => (
+                    <div key={r.id} className="p-4 rounded-lg" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+                      <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+                        <div>
+                          <p className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                            {r.name}
+                            {r.company && <span style={{ color: 'var(--text-secondary)' }}> · {r.company}</span>}
+                          </p>
+                          <p className="text-sm">
+                            <span style={{ color: 'var(--text-secondary)' }}>wants to interview </span>
+                            <span style={{ color: 'var(--primary)' }}>{r.member_name}</span>
+                          </p>
+                        </div>
+                        <p className="text-xs whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
+                          {new Date(r.created_at).toLocaleString()}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {r.engagement && <span className="chip">{r.engagement}</span>}
+                        {r.budget && <span className="chip">{r.budget}</span>}
+                      </div>
+
+                      <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>{r.message}</p>
+
+                      <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Re: interviewing ${r.member_name}`)}`}
+                        className="text-sm" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
+                        {r.email}
+                      </a>
                     </div>
                   ))
                 )}

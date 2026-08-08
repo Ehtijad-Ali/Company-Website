@@ -1,12 +1,20 @@
 // Determine API base URL based on environment
+const DEV_HOSTS = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0']
+
 const getApiBase = () => {
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    return 'http://localhost:5000/api'
+  // An explicit override always wins — set VITE_API_BASE when the backend
+  // lives on a different host to the frontend (separate deploys, staging).
+  if (import.meta.env?.VITE_API_BASE) return import.meta.env.VITE_API_BASE
+
+  if (typeof window !== 'undefined' && DEV_HOSTS.includes(window.location.hostname)) {
+    // Keep the host the page was opened on: pointing 127.0.0.1 at
+    // localhost:5000 (or vice versa) is a cross-origin request and trips CORS.
+    return `http://${window.location.hostname}:5000/api`
   }
-  // For production, use relative path or set your backend URL here
-  // This assumes your backend is deployed alongside your frontend
-  // or update with your production backend URL
-  return '/api' // relative path for same-origin requests
+
+  // Production: same-origin relative path, assuming the backend is deployed
+  // alongside the frontend. Override with VITE_API_BASE if it isn't.
+  return '/api'
 }
 
 const API_BASE = getApiBase()
@@ -49,6 +57,9 @@ export const apiClient = {
     },
     async getLogs(token) {
       return apiClient.request('/admin/logs', {}, token)
+    },
+    async getInterviews(token) {
+      return apiClient.request('/admin/interviews', {}, token)
     }
   },
 
@@ -56,6 +67,26 @@ export const apiClient = {
   auth: {
     async me(token) {
       return apiClient.request('/auth/me', {}, token)
+    }
+  },
+
+  // Contact endpoints
+  contact: {
+    async submit(payload) {
+      return apiClient.request('/contact', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      })
+    }
+  },
+
+  // Interview / hire requests for a specific team member
+  interview: {
+    async submit(payload) {
+      return apiClient.request('/interview', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      })
     }
   }
 }
