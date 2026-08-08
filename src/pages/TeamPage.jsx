@@ -1,80 +1,161 @@
-﻿import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Linkedin, Github, Twitter, Dribbble, ArrowRight, Globe2, Clock, Zap, Heart } from 'lucide-react'
+﻿import React, { useRef, useState, useMemo } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { ArrowRight, ArrowUpRight, Globe2, Clock, Zap, Heart, MapPin, SlidersHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { TEAM, DEPTS, formatRate } from '../data/team'
+import { AvailabilityBadge, Rating } from '../components/team/MemberBits'
 
-const FULL_TEAM = [
-  { name:'James Sterling',    role:'CEO & Founder',        dept:'Leadership',  bio:'Visionary leader with 20+ years driving digital innovation. Founded CodeNode with a mission to make world-class digital craftsmanship accessible to ambitious companies everywhere.',
-    img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Twitter] },
-  { name:'Elena Vos',         role:'Lead Data Scientist',   dept:'AI/ML',       bio:'PhD in Statistics from MIT. Spent 5 years at Bloomberg building real-time market prediction systems before joining CodeNode to lead our data science practice.',
-    img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Github] },
-  { name:'Dr. Arinze Okafor', role:'Senior AI Engineer',    dept:'AI/ML',       bio:'Ex-Google Research. Published author in NLP and computer vision. Leads our ML engineering team, building production-grade AI that actually ships and scales.',
-    img:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Github] },
-  { name:'Alex Thompson',     role:'Lead UX Designer',      dept:'Design',      bio:'10+ years crafting interfaces for Fortune 500 companies. Certified NN/g UX specialist with a philosophy that great design is invisible — it just works.',
-    img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Dribbble] },
-  { name:'Sophie Martin',     role:'Product Designer',      dept:'Design',      bio:'Former product designer at Figma and Notion. Bridges the gap between business strategy and beautiful execution. Speaker at design conferences across Europe.',
-    img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Dribbble] },
-  { name:'David Kim',         role:'Lead Developer',        dept:'Engineering', bio:'15-year full-stack veteran. Built infrastructure serving 50M+ users at two unicorn startups. Obsessed with performance, clean APIs, and mentoring junior engineers.',
-    img:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Github] },
-  { name:'Jennifer Lee',      role:'Marketing Lead',        dept:'Marketing',   bio:'Former Head of Growth at two Y Combinator companies. Expertise in data-driven paid and organic strategies that compound. Led campaigns generating $20M+ in pipeline.',
-    img:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Twitter] },
-  { name:'Marcus Johnson',    role:'Creative Director',     dept:'Design',      bio:'Award-winning global brand designer. Work featured in Print, Communication Arts, and Awwwards. Transforms brands from forgettable to iconic.',
-    img:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Dribbble] },
-  { name:'Michael Brown',     role:'E-commerce Lead',       dept:'Engineering', bio:'Generated $50M+ in e-commerce revenue for clients across fashion, beauty, and consumer goods. Shopify Plus expert with deep experience in conversion rate optimisation.',
-    img:'https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Twitter] },
-  { name:'Nina Patel',        role:'UX Researcher',         dept:'Design',      bio:'Mixed-methods researcher who turns ambiguity into actionable insights. Experience at Google and Airbnb shaping product decisions through user empathy.',
-    img:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face', socials:[Linkedin] },
-  { name:'Carlos Garcia',     role:'UI Designer',           dept:'Design',      bio:'Craft-obsessed visual designer with a background in fine arts and motion graphics. Creates design systems that scale and interfaces that delight.',
-    img:'https://images.unsplash.com/photo-1560250097-0dc05ffedb3d?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Dribbble] },
-  { name:'Emma Wilson',       role:'Interaction Designer',  dept:'Design',      bio:'Motion design meets interaction design. Makes interfaces feel alive with micro-interactions and transitions that communicate meaning, not just decoration.',
-    img:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face', socials:[Linkedin,Dribbble] },
+const SORTS = [
+  { id: 'featured',  label: 'Featured' },
+  { id: 'rate-asc',  label: 'Rate: low to high' },
+  { id: 'rate-desc', label: 'Rate: high to low' },
+  { id: 'rating',    label: 'Highest rated' },
 ]
 
+/**
+ * One roster card — a directory entry, so rate and availability lead.
+ *
+ * forwardRef because AnimatePresence's popLayout mode attaches a ref to each
+ * child to measure it; a plain function component would drop it silently and
+ * break the exit animation.
+ */
+const MemberCard = React.forwardRef(function MemberCard({ m, i }, ref) {
+  return (
+    <motion.div
+      ref={ref}
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: (i % 4) * 0.07, duration: 0.5 }}
+    >
+      <Link to={`/team/${m.slug}`} className="card card-hover flex flex-col h-full" style={{ padding: '1.125rem' }}>
+        <div className="relative mb-4">
+          <img
+            src={m.img} alt={m.name}
+            className="w-full object-cover"
+            style={{ aspectRatio: '4/3', objectPosition: 'top', borderRadius: 'var(--r-md)' }}
+            onError={e => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&bg=C96A4A&color=FFFCF8&bold=true&size=400` }}
+          />
+          <span className="absolute chip" style={{ top: 10, left: 10, background: 'var(--bg-card)' }}>{m.dept}</span>
+        </div>
+
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.0625rem', fontWeight: 500, lineHeight: 1.25, color: 'var(--text-primary)' }}>
+            {m.name}
+          </h3>
+          <ArrowUpRight className="w-4 h-4 shrink-0" style={{ color: 'var(--text-muted)', marginTop: 3 }} />
+        </div>
+
+        <p style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--brand)', marginBottom: '0.75rem' }}>
+          {m.role}
+        </p>
+
+        <p style={{ fontSize: '0.8125rem', lineHeight: 1.6, color: 'var(--text-secondary)', marginBottom: '0.875rem', flex: 1 }}>
+          {m.tagline}
+        </p>
+
+        <div className="flex items-center justify-between gap-2 mb-3" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="w-3 h-3" /> {m.location}
+          </span>
+          <Rating value={m.stats.rating} />
+        </div>
+
+        <div className="flex items-center justify-between gap-2"
+          style={{ paddingTop: '0.875rem', borderTop: '1px solid var(--divider)' }}>
+          <span className="tnum" style={{ fontFamily: 'var(--font-display)', fontSize: '1.125rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+            {formatRate(m.rate)}
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 400 }}>/hr</span>
+          </span>
+          <AvailabilityBadge status={m.availability} />
+        </div>
+      </Link>
+    </motion.div>
+  )
+})
+
 export default function TeamPage() {
+  const [dept, setDept] = useState('All')
+  const [sort, setSort] = useState('featured')
+
+  const visible = useMemo(() => {
+    const list = dept === 'All' ? [...TEAM] : TEAM.filter(m => m.dept === dept)
+    switch (sort) {
+      case 'rate-asc':  return list.sort((a, b) => a.rate - b.rate)
+      case 'rate-desc': return list.sort((a, b) => b.rate - a.rate)
+      case 'rating':    return list.sort((a, b) => b.stats.rating - a.stats.rating)
+      default:          return list
+    }
+  }, [dept, sort])
+
+  const openNow = TEAM.filter(m => m.availability === 'available').length
+  const lowestRate = Math.min(...TEAM.map(m => m.rate))
+
   return (
     <>
-      <section className="section pt-36" style={{ background:'var(--bg-surface)' }}>
+      <section className="section pt-36" style={{ background: 'var(--bg-surface)' }}>
         <div className="container">
-          <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.6 }}
-            className="mb-14">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color:'var(--text-muted)' }}>/ 01 — Team</p>
-            <div className="flex items-end gap-6">
-              <h1 className="section-title shrink-0">Our People</h1>
-              <div className="flex-1 h-px mb-2.5" style={{ background:'var(--border)' }} />
-              <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-                style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>01</span>
-            </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="mb-10">
+            <p className="eyebrow mb-3">
+              <span style={{ color: 'var(--brand)' }}>01</span>
+              <span style={{ margin: '0 0.6rem', opacity: 0.4 }}>/</span>Team
+            </p>
+            <h1 style={{
+              fontFamily: 'var(--font-display)', fontSize: 'var(--step-5)', fontWeight: 500,
+              lineHeight: 1.05, letterSpacing: '-0.028em', color: 'var(--text-primary)', marginBottom: '1rem',
+            }}>
+              Hire the <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>individual</em>,
+              {' '}not just the agency
+            </h1>
+            <p className="section-sub">
+              Every person here can be engaged directly — by the hour, for a sprint, or embedded in your team.
+              {' '}{openNow} available now, from {formatRate(lowestRate)}/hr.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {FULL_TEAM.map((m, i) => (
-              <motion.div key={m.name}
-                initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
-                viewport={{ once:true, margin:'-40px' }}
-                transition={{ delay:(i%4)*.08, duration:.55 }}
-                className="card p-6 group"
-              >
-                <div className="relative mb-5">
-                  <img src={m.img} alt={m.name}
-                    className="w-full aspect-square rounded-xl object-cover"
-                    style={{ objectPosition:'top' }}
-                    onError={e=>{ e.target.src=`https://ui-avatars.com/api/?name=${m.name}&bg=6366f1&color=fff&bold=true&size=400` }} />
-                  <span className="absolute bottom-3 left-3 chip text-[9px]">{m.dept}</span>
-                </div>
-                <h3 className="font-syne font-bold text-base mb-0.5" style={{ color:'var(--text-primary)' }}>{m.name}</h3>
-                <p className="font-mono text-xs mb-3 text-accent">{m.role}</p>
-                <p className="text-xs leading-relaxed mb-4 line-clamp-3" style={{ color:'var(--text-secondary)' }}>{m.bio}</p>
-                <div className="flex gap-2">
-                  {m.socials.map((Icon, si) => (
-                    <button key={si} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:border-accent"
-                      style={{ background:'var(--bg)', border:'1px solid var(--border)' }}>
-                      <Icon className="w-3 h-3" style={{ color:'var(--text-secondary)' }} />
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+          {/* Filters */}
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8"
+            style={{ borderBottom: '1px solid var(--border)' }}>
+            <div className="flex flex-wrap">
+              {DEPTS.map(d => (
+                <button key={d} onClick={() => setDept(d)}
+                  className="relative pb-3 mr-6 eyebrow"
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    color: dept === d ? 'var(--text-primary)' : 'var(--text-muted)',
+                  }}>
+                  {d}
+                  {dept === d && (
+                    <motion.div layoutId="teampage-underline"
+                      style={{ position: 'absolute', bottom: -1, left: 0, right: 0, height: 1.5, background: 'var(--brand)' }}
+                      transition={{ type: 'spring', bounce: 0.18, duration: 0.45 }} />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            <label className="flex items-center gap-2 pb-2.5">
+              <SlidersHorizontal className="w-3.5 h-3.5" style={{ color: 'var(--text-muted)' }} />
+              <span className="sr-only">Sort by</span>
+              <select
+                value={sort} onChange={e => setSort(e.target.value)}
+                style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.08em',
+                  textTransform: 'uppercase', color: 'var(--text-secondary)',
+                  background: 'transparent', border: 'none', cursor: 'pointer', outline: 'none',
+                }}>
+                {SORTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+              </select>
+            </label>
           </div>
+
+          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <AnimatePresence mode="popLayout">
+              {visible.map((m, i) => <MemberCard key={m.slug} m={m} i={i} />)}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 

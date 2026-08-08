@@ -5,7 +5,7 @@ const TECHS = [
   { id: "nodejs",     label: "Node.js",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",          color: "#539E43" },
   { id: "nextjs",     label: "Next.js",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",          color: "#ffffff" },
   { id: "postgresql", label: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",  color: "#336791" },
-  { id: "aws",        label: "AWS",        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg", color: "#FF9900" },
+  { id: "aws",        label: "AWS",        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", color: "#FF9900" },
   { id: "webpack",    label: "Webpack",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg",        color: "#8DD6F9" },
   { id: "vite",       label: "Vite",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",          color: "#646CFF" },
   { id: "redux",      label: "Redux",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",            color: "#764ABC" },

@@ -31,6 +31,30 @@ DATABASE=auth.db
 CORS_ORIGINS=http://localhost:5173,http://localhost:3000
 ```
 
+#### Optional: AI chat assistant
+
+The site's chat widget works without any of this — it falls back to a scripted
+knowledge base (`src/services/chatKnowledge.js`) whenever the backend is absent
+or unconfigured. Add these to turn on real Claude-powered answers:
+
+```env
+ANTHROPIC_API_KEY=sk-ant-...
+CHAT_MODEL=claude-opus-5      # optional; this is the default
+CHAT_RATE_LIMIT=20            # messages per IP per window (default 20)
+CHAT_RATE_WINDOW=3600         # window in seconds (default 1 hour)
+```
+
+Claude Opus 5 is billed at $5 per million input tokens and $25 per million
+output tokens. Chat replies are capped at 1024 output tokens and the system
+brief is prompt-cached, so a typical exchange costs well under a cent — but the
+endpoint is public, hence the per-IP rate limit. Lower `CHAT_RATE_LIMIT` to
+tighten it, or drop `CHAT_MODEL` to `claude-haiku-4-5` for roughly a fifth of
+the cost at lower answer quality.
+
+Check it is live with `GET /api/chat`, which reports `{"ready": true}` once the
+key is set. The widget calls this once on page load and only offers AI answers
+when it returns true.
+
 ### 3. Start the Backend Server
 
 ```bash

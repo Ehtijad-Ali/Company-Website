@@ -169,7 +169,7 @@ export default function Testimonials() {
                       src={t.img} alt={t.name}
                       className="w-11 h-11 rounded-full object-cover"
                       style={{ outline: '2px solid var(--accent)', outlineOffset: 2 }}
-                      onError={e => { e.target.src = `https://ui-avatars.com/api/?name=${t.name}&bg=6366f1&color=fff&bold=true&size=100` }}
+                      onError={e => { e.target.src = `https://ui-avatars.com/api/?name=${t.name}&bg=C96A4A&color=FFFCF8&bold=true&size=100` }}
                     />
                     <div>
                       <p className="font-syne font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
@@ -237,7 +237,7 @@ export default function Testimonials() {
                   <img
                     src={c.img} alt={c.name}
                     className="w-7 h-7 rounded-full object-cover shrink-0"
-                    onError={e => { e.target.src = `https://ui-avatars.com/api/?name=${c.name}&bg=6366f1&color=fff&bold=true&size=100` }}
+                    onError={e => { e.target.src = `https://ui-avatars.com/api/?name=${c.name}&bg=C96A4A&color=FFFCF8&bold=true&size=100` }}
                   />
                   <div className="min-w-0 flex-1">
                     <p className="font-syne font-semibold text-xs truncate" style={{ color: i === active ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{c.name}</p>

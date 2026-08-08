@@ -10,26 +10,37 @@ class ErrorBoundary extends React.Component {
     if (this.state.err) {
       return (
         <div style={{
-          position: 'fixed', inset: 0, background: '#06060F',
+          position: 'fixed', inset: 0, background: '#14100E',
           display: 'flex', flexDirection: 'column', alignItems: 'center',
-          justifyContent: 'center', fontFamily: 'monospace', color: '#F1F5F9',
-          padding: 32, gap: 16
+          justifyContent: 'center', color: '#F4EADE',
+          fontFamily: "'Inter', system-ui, sans-serif",
+          padding: 32, gap: 14
         }}>
-          <div style={{ fontSize: 48 }}>⚠️</div>
-          <h2 style={{ color: '#FF6B6B', margin: 0 }}>Runtime Error</h2>
+          <h2 style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontWeight: 500, fontSize: 28, letterSpacing: '-0.02em', margin: 0,
+          }}>
+            Something went <em style={{ fontStyle: 'italic', color: '#D68667' }}>wrong</em>
+          </h2>
+          <p style={{ color: '#9C8878', fontSize: 14, margin: '0 0 8px', textAlign: 'center' }}>
+            The page hit an unexpected error. Reloading usually clears it.
+          </p>
           <pre style={{
-            background: '#11111F', border: '1px solid rgba(255,107,107,0.3)',
-            borderRadius: 12, padding: '16px 24px', maxWidth: 700, width: '100%',
-            overflow: 'auto', fontSize: 13, color: '#FF9F9F', whiteSpace: 'pre-wrap'
+            background: '#1B1512', border: '1px solid rgba(238,220,200,0.10)',
+            borderRadius: 8, padding: '16px 20px', maxWidth: 700, width: '100%',
+            overflow: 'auto', fontSize: 12, lineHeight: 1.6,
+            fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+            color: '#C4B2A2', whiteSpace: 'pre-wrap'
           }}>
             {this.state.err?.message}
             {'\n\n'}
             {this.state.err?.stack}
           </pre>
           <button onClick={() => window.location.reload()}
-            style={{ background: '#ffffff', color: '#000000', border: 'none',
-              borderRadius: 10, padding: '10px 24px', cursor: 'pointer', fontSize: 14 }}>
-            Reload
+            style={{ background: '#C96A4A', color: '#FFFCF8', border: 'none',
+              borderRadius: 8, padding: '11px 22px', cursor: 'pointer',
+              fontSize: 14, fontWeight: 500, fontFamily: 'inherit' }}>
+            Reload page
           </button>
         </div>
       )

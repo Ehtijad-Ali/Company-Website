@@ -5,25 +5,32 @@ import { ArrowRight } from 'lucide-react'
 import { TypingText, ParallaxSection } from '../ui/AnimationKit'
 
 const STATS = [
-  { value: '500+', label: 'Projects'     },
-  { value: '98%',  label: 'Satisfaction' },
-  { value: '10+',  label: 'Years'        },
-  { value: '30+',  label: 'Countries'   },
+  { value: '500+', label: 'Projects shipped' },
+  { value: '98%',  label: 'Client retention' },
+  { value: '10+',  label: 'Years in practice' },
+  { value: '30+',  label: 'Countries served' },
 ]
 
 const TECH = ['React', 'Next.js', 'Node.js', 'Python', 'AWS', 'TypeScript', 'TensorFlow', 'Docker', 'GraphQL', 'Figma', 'Three.js', 'Kubernetes']
 
 const E = [0.22, 1, 0.36, 1]
-const LINES = ['We Build', 'What Others', 'Only Imagine.']
 
-/* ─── Syntax colours ─── */
-const K = '#c084fc'
-const S = '#fb923c'
-const F = '#60a5fa'
+/* Headline set as roman + italic, the way a masthead is set —
+   the italic carries the emphasis so nothing has to shout. */
+const LINES = [
+  [{ t: 'We build' }],
+  [{ t: 'what others' }],
+  [{ t: 'only ' }, { t: 'imagine.', italic: true }],
+]
+
+/* ─── Syntax colours — drawn from the palette, not a stock dark theme ─── */
+const K = 'var(--syn-keyword)'
+const S = 'var(--syn-string)'
+const F = 'var(--syn-fn)'
 const D = 'var(--terminal-text)'
 const C = 'var(--terminal-comment)'
-const G = '#34d399'
-const Y = '#fbbf24'
+const G = 'var(--syn-ok)'
+const Y = 'var(--syn-warn)'
 
 const CODE_LINES = [
   [[C, '# CodeNode · AI Stack Configuration']],
@@ -90,30 +97,27 @@ function CodeTerminal() {
       style={{
         background: 'var(--terminal-bg)',
         border: '1px solid var(--terminal-border)',
-        borderRadius: '16px',
+        borderRadius: 'var(--r-lg)',
         overflow: 'hidden',
-        boxShadow: '0 24px 64px rgba(0,0,0,0.22)',
+        boxShadow: 'var(--e-4)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
       }}
     >
-      {/* Header */}
+      {/* Header — a filename and a status, not a fake macOS chrome */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: '0.5rem',
-        padding: '0.75rem 1.1rem', flexShrink: 0,
+        padding: '0.7rem 1.1rem', flexShrink: 0,
         borderBottom: '1px solid var(--terminal-divider)',
         background: 'var(--terminal-header)',
       }}>
-        {['#FF5F57','#FFBD2E','#28CA41'].map(c => (
-          <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c, opacity: 0.85 }} />
-        ))}
-        <span style={{ marginLeft: '0.5rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: 'var(--terminal-label)', letterSpacing: '0.05em' }}>
+        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.66rem', color: 'var(--terminal-label)', letterSpacing: '0.02em' }}>
           agent.py
         </span>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#34d399' }} />
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.58rem', color: 'var(--terminal-label)' }}>running</span>
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--syn-ok)' }} />
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terminal-label)' }}>running</span>
         </div>
       </div>
 
@@ -176,28 +180,15 @@ export default function Hero() {
         className="container relative z-10 flex items-center justify-between"
         style={{ paddingTop: '7rem', paddingBottom: '2.5rem', borderBottom: '1px solid var(--border)' }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-            <span className="font-mono text-[10px] tracking-[0.35em] uppercase" style={{ color: 'var(--text-muted)' }}>
-              CodeNode / Studio
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.35em] uppercase" style={{ color: 'var(--text-secondary)' }}>
-              Founded 2024
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.35em] uppercase" style={{ color: 'var(--text-secondary)' }}>
-              Cozy · Inviting · Timeless
-            </span>
-          </div>
-          <span
-            className="font-syne font-extrabold hidden lg:block pointer-events-none select-none"
-            style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em' }}
-          >01</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7">
+          <span className="eyebrow" style={{ color: 'var(--text-primary)' }}>CodeNode Studio</span>
+          <span className="hidden sm:block" style={{ width: 1, height: 12, background: 'var(--divider)' }} />
+          <span className="eyebrow">Strategy · Design · Engineering</span>
         </div>
         <span className="badge">
           <span className="w-1.5 h-1.5 rounded-full"
-            style={{ background: 'var(--accent)', animation: 'pulse-ring 2s ease-in-out infinite' }} />
-          Available for new projects
+            style={{ background: 'var(--brand)', animation: 'pulse-ring 2.4s ease-in-out infinite' }} />
+          Taking on work for Q3
         </span>
       </motion.div>
 
@@ -209,71 +200,75 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6, ease: E }}
-            className="font-mono text-[10px] tracking-[0.35em] uppercase mb-7"
-            style={{ color: 'var(--text-muted)' }}
+            className="eyebrow mb-7"
           >
-            01 — Crafting the Future
+            <span style={{ color: 'var(--brand)' }}>01</span>
+            <span style={{ margin: '0 0.6rem', opacity: 0.4 }}>/</span>
+            Digital product studio
           </motion.p>
 
           {LINES.map((line, i) => (
-            <div key={line} style={{ overflow: 'hidden', lineHeight: 1.1 }}>
-              <motion.div
-                initial={{ y: '105%' }}
+            <div key={i} style={{ overflow: 'hidden' }}>
+              <motion.h1
+                initial={{ y: '104%' }}
                 animate={{ y: 0 }}
-                transition={{ delay: 0.28 + i * 0.13, duration: 0.95, ease: E }}
-                className="font-syne font-extrabold"
+                transition={{ delay: 0.28 + i * 0.11, duration: 0.95, ease: E }}
                 style={{
-                  fontSize: 'clamp(2rem, 4.5vw, 4rem)',
-                  letterSpacing: '-0.02em',
-                  color: i === 2 ? 'transparent' : 'var(--text-primary)',
-                  WebkitTextStroke: i === 2 ? '1px var(--text-primary)' : undefined,
-                  paddingBottom: i < 2 ? '0.05em' : '0.15em',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--step-6)',
+                  fontWeight: 500,
+                  lineHeight: 1.04,
+                  letterSpacing: '-0.028em',
+                  color: 'var(--text-primary)',
+                  paddingBottom: '0.06em',
                 }}
               >
-                {line}
-              </motion.div>
+                {line.map((part, pi) =>
+                  part.italic ? (
+                    <em key={pi} style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>
+                      {part.t}
+                    </em>
+                  ) : (
+                    <span key={pi}>{part.t}</span>
+                  )
+                )}
+              </motion.h1>
             </div>
           ))}
 
           <motion.div
             initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
             transition={{ delay: 0.7, duration: 0.9, ease: E }}
-            style={{ height: '1px', background: 'var(--border)', transformOrigin: 'left', marginTop: '2rem', marginBottom: '2rem' }}
+            style={{ height: '1px', background: 'var(--divider)', transformOrigin: 'left', margin: '2.25rem 0 1.75rem' }}
           />
 
           <motion.p
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7, ease: E }}
-            className="section-sub mb-3"
+            className="section-sub mb-8"
+            style={{ maxWidth: '46ch' }}
           >
-            A premium digital agency specialising in{' '}
+            We design and build{' '}
             <TypingText
-              words={['AI-driven platforms.', 'immersive 3D experiences.', 'enterprise web apps.', 'stunning UI/UX design.']}
+              words={['AI-driven platforms.', 'immersive 3D experiences.', 'enterprise web apps.', 'design systems that hold up.']}
               speed={62}
               pauseMs={1800}
-              style={{ color: 'var(--text-primary)', fontWeight: 600 }}
+              style={{ color: 'var(--text-primary)', fontWeight: 500 }}
             />
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.7, ease: E }}
-            className="section-sub mb-8"
-            style={{ fontSize: '0.92rem', marginTop: '0.25rem' }}
-          >
-            We don't follow trends — we set them.
+            <br />
+            Small team, senior hands, no handoffs.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7, ease: E }}
-            className="flex gap-3 flex-wrap"
+            className="flex gap-3 flex-wrap items-center"
           >
-            <Link to="/contact" className="btn btn-primary btn-hover-micro micro-click hover-lift">
-              Start a Project <ArrowRight className="w-4 h-4" />
+            <Link to="/contact" className="btn btn-primary micro-click">
+              Start a project <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/portfolio" className="btn btn-secondary btn-hover-micro hover-scale">
-              View Work
+            <Link to="/portfolio" className="btn btn-secondary">
+              See our work
             </Link>
           </motion.div>
         </div>
@@ -291,12 +286,12 @@ export default function Hero() {
         style={{ borderTop: '1px solid var(--border)' }}
       >
         {STATS.map(({ value, label }, i) => (
-          <div key={label} className="py-6 text-center"
+          <div key={label} className="py-7 px-4"
             style={{ borderRight: i < 3 ? '1px solid var(--border)' : 'none' }}>
-            <p className="font-syne font-extrabold"
-              style={{ fontSize: '1.6rem', lineHeight: 1, color: 'var(--text-primary)' }}>{value}</p>
-            <p className="font-mono text-[9px] uppercase tracking-widest mt-1.5"
-              style={{ color: 'var(--text-secondary)' }}>{label}</p>
+            <p className="tnum"
+              style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--step-3)', fontWeight: 500,
+                       lineHeight: 1, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>{value}</p>
+            <p className="eyebrow mt-2" style={{ letterSpacing: '0.16em' }}>{label}</p>
           </div>
         ))}
       </motion.div>

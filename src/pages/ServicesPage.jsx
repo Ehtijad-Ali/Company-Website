@@ -102,10 +102,10 @@ export default function ServicesPage() {
 
 /* ─── WHY CHOOSE US ────────────────────────────────────────────── */
 const WHY_US = [
-  { icon: Rocket,       stat: '3×',   color: '#818cf8', title: 'Faster Time-to-Market',   desc: 'Our battle-tested sprint framework cuts typical agency timelines by two-thirds — without skipping a single quality gate.' },
-  { icon: Lock,         stat: '100%', color: '#a78bfa', title: 'IP Fully Owned by You',    desc: 'Every line of code and asset belongs to you from day one. We sign an IP assignment clause in every contract — no exceptions.' },
-  { icon: Headphones,   stat: '24/7', color: '#38bdf8', title: 'Always-On Support',        desc: 'Real humans, fast responses, zero ticket limbo. Your dedicated team is one Slack message away, around the clock.' },
-  { icon: Trophy,       stat: '98%',  color: '#4ade80', title: 'Client Satisfaction',      desc: 'Backed by reviews from 200+ clients worldwide. We don\'t just ship products — we build long-term partnerships.' },
+  { icon: Rocket,       stat: '3×',   color: 'var(--brand)', title: 'Faster Time-to-Market',   desc: 'Our battle-tested sprint framework cuts typical agency timelines by two-thirds — without skipping a single quality gate.' },
+  { icon: Lock,         stat: '100%', color: 'var(--brand)', title: 'IP Fully Owned by You',    desc: 'Every line of code and asset belongs to you from day one. We sign an IP assignment clause in every contract — no exceptions.' },
+  { icon: Headphones,   stat: '24/7', color: 'var(--brand)', title: 'Always-On Support',        desc: 'Real humans, fast responses, zero ticket limbo. Your dedicated team is one Slack message away, around the clock.' },
+  { icon: Trophy,       stat: '98%',  color: 'var(--brand)', title: 'Client Satisfaction',      desc: 'Backed by reviews from 200+ clients worldwide. We don\'t just ship products — we build long-term partnerships.' },
 ]
 
 function WhyUsSection() {
@@ -237,18 +237,18 @@ function GuaranteeSection() {
 
 /* ─── TECH STACK SECTION ───────────────────────────────────────── */
 const TECH = [
-  { name: 'React',       abbr: 'Re',  color: '#61dafb', cat: 'Frontend'  },
-  { name: 'Next.js',     abbr: 'N▲',  color: '#e2e8f0', cat: 'Frontend'  },
-  { name: 'TypeScript',  abbr: 'TS',  color: '#3b82f6', cat: 'Language'  },
-  { name: 'Node.js',     abbr: 'No',  color: '#22c55e', cat: 'Backend'   },
-  { name: 'Python',      abbr: 'Py',  color: '#facc15', cat: 'Backend'   },
-  { name: 'PostgreSQL',  abbr: 'PG',  color: '#38bdf8', cat: 'Database'  },
-  { name: 'MongoDB',     abbr: 'Mg',  color: '#4ade80', cat: 'Database'  },
-  { name: 'AWS',         abbr: 'AWS', color: '#fb923c', cat: 'Cloud'     },
-  { name: 'Docker',      abbr: 'Do',  color: '#60a5fa', cat: 'DevOps'    },
-  { name: 'Kubernetes',  abbr: 'K8s', color: '#818cf8', cat: 'DevOps'    },
-  { name: 'TensorFlow',  abbr: 'TF',  color: '#f97316', cat: 'AI / ML'   },
-  { name: 'OpenAI',      abbr: 'AI',  color: '#a78bfa', cat: 'AI / ML'   },
+  { name: 'React',       abbr: 'Re',  color: '#61DAFB', cat: 'Frontend'  },
+  { name: 'Next.js',     abbr: 'N▲',  color: '#E0C8AC', cat: 'Frontend'  },
+  { name: 'TypeScript',  abbr: 'TS',  color: '#3178C6', cat: 'Language'  },
+  { name: 'Node.js',     abbr: 'No',  color: '#539E43', cat: 'Backend'   },
+  { name: 'Python',      abbr: 'Py',  color: '#3776AB', cat: 'Backend'   },
+  { name: 'PostgreSQL',  abbr: 'PG',  color: '#336791', cat: 'Database'  },
+  { name: 'MongoDB',     abbr: 'Mg',  color: '#47A248', cat: 'Database'  },
+  { name: 'AWS',         abbr: 'AWS', color: '#FF9900', cat: 'Cloud'     },
+  { name: 'Docker',      abbr: 'Do',  color: '#2496ED', cat: 'DevOps'    },
+  { name: 'Kubernetes',  abbr: 'K8s', color: '#326CE5', cat: 'DevOps'    },
+  { name: 'TensorFlow',  abbr: 'TF',  color: '#FF6F00', cat: 'AI / ML'   },
+  { name: 'OpenAI',      abbr: 'AI',  color: '#10A37F', cat: 'AI / ML'   },
 ]
 
 function TechStackSection() {

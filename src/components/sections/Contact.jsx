@@ -1,6 +1,8 @@
-﻿import React, { useRef, useState } from 'react'
+﻿import React, { useRef, useState, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, CheckCircle, ArrowRight, Linkedin, Twitter, Github, Instagram, Plus, Minus } from 'lucide-react'
+import { apiClient } from '../../services/apiClient'
+import { useContact } from '../../context/ContactContext'
 
 const INFO = [
   { icon:Mail,    label:'Email',  value:'hello@codenode.io' },
@@ -74,12 +76,65 @@ export default function Contact({ forceVisible = false }) {
   const inView    = forceVisible || inViewRaw
   const [form, setForm]     = useState({ name:'', email:'', service:'', message:'' })
   const [status, setStatus] = useState('idle')
+  const [error, setError]   = useState('')
+  const [warning, setWarning] = useState('')
+  const { closeContact } = useContact()
+
+  useEffect(() => {
+    if (status === 'done') {
+      // close modal after a short delay so user sees the success state
+      const t = setTimeout(() => {
+        try { closeContact() } catch (e) { /* ignore when not in modal */ }
+      }, 1200)
+      return () => clearTimeout(t)
+    }
+  }, [status, closeContact])
 
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
+    setError('')
+    setWarning('')
     setStatus('sending')
-    setTimeout(() => setStatus('done'), 2000)
+    // Client-side validation
+    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+    if (!form.name || form.name.trim().length < 2) {
+      setError('Please enter your name (min 2 characters).')
+      setStatus('idle')
+      return
+    }
+    if (!form.email || !isEmail(form.email)) {
+      setError('Please enter a valid email address.')
+      setStatus('idle')
+      return
+    }
+    if (!form.service) {
+      setError('Please select a service.')
+      setStatus('idle')
+      return
+    }
+    if (!form.message || form.message.trim().length < 10) {
+      setError('Please enter a message (min 10 characters).')
+      setStatus('idle')
+      return
+    }
+
+    try {
+      const result = await apiClient.contact.submit(form)
+      if (result.warning) {
+        setWarning(result.warning)
+      }
+      setStatus('done')
+      setForm({ name:'', email:'', service:'', message:'' })
+    } catch (err) {
+      setError(err.message || 'Unable to send your message. Please try again later.')
+      setStatus('error')
+    }
+  }
+
+  const isFormValid = () => {
+    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+    return form.name.trim().length >= 2 && isEmail(form.email) && form.service && form.message.trim().length >= 10
   }
 
   return (
@@ -184,6 +239,16 @@ export default function Contact({ forceVisible = false }) {
                   </motion.div>
                 ) : (
                   <motion.form key="form" onSubmit={submit} className="space-y-4">
+                    {error && (
+                      <div className="rounded-2xl p-4" style={{ background:'rgba(255,107,107,0.1)', border:'1px solid rgba(255,107,107,0.3)' }}>
+                        <p className="text-sm" style={{ color:'var(--text-red)' }}>{error}</p>
+                      </div>
+                    )}
+                    {warning && (
+                      <div className="rounded-2xl p-4" style={{ background:'rgba(249,115,22,0.08)', border:'1px solid rgba(249,115,22,0.2)' }}>
+                        <p className="text-sm" style={{ color:'var(--text-secondary)' }}>{warning}</p>
+                      </div>
+                    )}
                     <h3 className="font-syne font-bold text-xl mb-6" style={{ color:'var(--text-primary)' }}>Start a Conversation</h3>
                     <div className="grid grid-cols-2 gap-4">
                       <input className="input" type="text"   required placeholder="Your Name"       value={form.name}    onChange={set('name')} />

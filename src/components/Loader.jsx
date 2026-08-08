@@ -54,7 +54,7 @@ export default function Loader({ done }) {
         {/* Inner shadow at crease */}
         <div style={{
           position: 'absolute', top: 0, right: 0, bottom: 0, width: 48,
-          background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.06))',
+          background: 'linear-gradient(90deg, transparent, rgba(27,20,18,0.05))',
           opacity: isOpen ? 0 : 1,
           transition: 'opacity 0.25s',
           pointerEvents: 'none',
@@ -74,7 +74,7 @@ export default function Loader({ done }) {
         {/* Inner shadow at crease */}
         <div style={{
           position: 'absolute', top: 0, left: 0, bottom: 0, width: 48,
-          background: 'linear-gradient(-90deg, transparent, rgba(0,0,0,0.06))',
+          background: 'linear-gradient(-90deg, transparent, rgba(27,20,18,0.05))',
           opacity: isOpen ? 0 : 1,
           transition: 'opacity 0.25s',
           pointerEvents: 'none',
@@ -119,51 +119,53 @@ export default function Loader({ done }) {
 
         {/* Logo mark */}
         <div style={{
-          width: 56, height: 56, borderRadius: 16, marginBottom: 24,
+          width: 52, height: 52, borderRadius: 'var(--r-md)', marginBottom: 22,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'var(--bg-card)', border: '1px solid var(--border)',
+          background: 'var(--brand)',
         }}>
-          <svg viewBox="0 0 24 24" style={{ width: 22, height: 22, stroke: 'var(--text-primary)', strokeWidth: 2.5 }} fill="none">
+          <svg viewBox="0 0 24 24" style={{ width: 20, height: 20, stroke: 'var(--text-on-brand)', strokeWidth: 2.25 }}
+               fill="none" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="16 18 22 12 16 6" />
             <polyline points="8 6 2 12 8 18" />
           </svg>
         </div>
 
         <h1 style={{
-          fontFamily: 'Nasalization, Montserrat, sans-serif',
-          fontWeight: 700, fontSize: '1.875rem', letterSpacing: '-0.02em',
-          color: 'var(--text-primary)', margin: '0 0 4px',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 500, fontSize: '2rem', letterSpacing: '-0.025em',
+          color: 'var(--text-primary)', margin: '0 0 6px',
         }}>
-          Code<span style={{ color: 'var(--accent)' }}>Node</span>
+          Code<em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>Node</em>
         </h1>
 
         <p style={{
-          fontFamily: "'Courier New', monospace",
-          fontSize: '0.68rem', letterSpacing: '0.2em',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.6875rem', letterSpacing: '0.22em',
           textTransform: 'uppercase',
-          color: 'var(--text-muted)', margin: '0 0 40px',
+          color: 'var(--text-muted)', margin: '0 0 38px',
         }}>
-          Premium Digital Agency
+          Digital Product Studio
         </p>
 
         {/* Progress bar */}
         <div style={{ width: 210 }}>
           <div style={{
-            height: 1.5, borderRadius: 99, marginBottom: 8,
+            height: 2, borderRadius: 'var(--r-full)', marginBottom: 10,
             overflow: 'hidden', background: 'var(--border)',
           }}>
             <div style={{
-              height: '100%', borderRadius: 99,
-              background: 'var(--primary)',
+              height: '100%', borderRadius: 'var(--r-full)',
+              background: 'var(--brand)',
               width: `${pct}%`,
               transition: 'width 0.1s linear',
             }} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span style={{ fontFamily: "'Courier New', monospace", fontSize: '0.6rem', color: 'var(--text-muted)' }}>
-              Initialising
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.625rem', letterSpacing: '0.12em',
+                           textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+              Loading
             </span>
-            <span style={{ fontFamily: "'Courier New', monospace", fontSize: '0.6rem', color: 'var(--text-secondary)' }}>
+            <span className="tnum" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.625rem', color: 'var(--text-secondary)' }}>
               {Math.round(pct)}%
             </span>
           </div>
