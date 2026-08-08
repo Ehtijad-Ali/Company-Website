@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { TypingText, ParallaxSection } from '../ui/AnimationKit'
+import { METRICS, format } from '../../data/metrics'
 
-const STATS = [
-  { value: '500+', label: 'Projects shipped' },
-  { value: '98%',  label: 'Client retention' },
-  { value: '10+',  label: 'Years in practice' },
-  { value: '30+',  label: 'Countries served' },
-]
+/* Pulled from the shared source so the hero can't drift from the stats
+   section again — it previously claimed 500+ projects against its 60+. */
+const STATS = ['projects', 'satisfaction', 'years', 'countries'].map(k => ({
+  value: format(k),
+  label: METRICS[k].label,
+}))
 
 const TECH = ['React', 'Next.js', 'Node.js', 'Python', 'AWS', 'TypeScript', 'TensorFlow', 'Docker', 'GraphQL', 'Figma', 'Three.js', 'Kubernetes']
 

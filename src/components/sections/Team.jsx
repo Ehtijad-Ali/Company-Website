@@ -131,7 +131,7 @@ export default function Team() {
         >
           <div>
             <p className="eyebrow mb-3">
-              <span style={{ color: 'var(--brand)' }}>06</span>
+              <span style={{ color: 'var(--brand)' }}>07</span>
               <span style={{ margin: '0 0.6rem', opacity: 0.4 }}>/</span>Team
             </p>
             <h2 className="section-title">

@@ -1,24 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import SectionHeader from '../ui/SectionHeader'
+import { METRICS } from '../../data/metrics'
 
-const STATS = [
-  {
-    end: 98, suffix: '%', label: 'Client Satisfaction',
-    desc: 'Measured post-delivery across every engagement we\'ve shipped.',
-  },
-  {
-    end: 60, suffix: '+', label: 'Projects Delivered',
-    desc: 'From zero-to-one MVPs to large-scale enterprise rewrites.',
-  },
-  {
-    end: 50, prefix: '$', suffix: 'M+', label: 'Revenue Unlocked',
-    desc: 'Measurable business impact our products have driven for clients.',
-  },
-  {
-    end: 4.9, suffix: '★', label: 'Average Rating', decimals: 1,
-    desc: 'Verified across Clutch, Upwork, and direct client surveys.',
-  },
-]
+const KEYS = ['satisfaction', 'projects', 'revenue', 'rating']
+const STATS = KEYS.map(k => {
+  const m = METRICS[k]
+  return { end: m.value, prefix: m.prefix, suffix: m.suffix, decimals: m.decimals ?? 0,
+           label: m.label, desc: m.desc }
+})
 
 function Counter({ end, prefix = '', suffix = '', decimals = 0, inView }) {
   const [val, setVal] = useState(0)
@@ -55,22 +45,13 @@ export default function StatsCounter() {
       <div className="container">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-14 flex items-end justify-between"
-        >
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
-              style={{ color: 'var(--text-muted)' }}>/ 05 — Impact</p>
-            <h2 className="section-title">Numbers that<br />move the needle.</h2>
-          </div>
-          <span className="font-syne font-extrabold hidden lg:block"
-            style={{ fontSize: 'clamp(4rem,7vw,7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}>
-            05
-          </span>
-        </motion.div>
+        <SectionHeader
+          num="05"
+          label="Impact"
+          title={[{ t: 'Numbers that ' }, { t: 'move the needle', em: true }]}
+          inView={inView}
+          className="mb-12"
+        />
 
         {/* Stat cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -88,8 +69,10 @@ export default function StatsCounter() {
                 style={{ background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)' }} />
 
               {/* Big number */}
-              <p className="font-syne font-extrabold mb-2 leading-none"
-                style={{ fontSize: 'clamp(2.6rem,4.5vw,3.6rem)', letterSpacing: '-0.03em' }}>
+              <p className="tnum mb-2 leading-none"
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 500,
+                         fontSize: 'clamp(2.6rem,4.5vw,3.6rem)', letterSpacing: '-0.03em',
+                         color: 'var(--text-primary)' }}>
                 <Counter {...stat} inView={inView} />
               </p>
 

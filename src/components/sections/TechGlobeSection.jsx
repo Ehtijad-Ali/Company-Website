@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import TechGlobe3D from '../ui/TechGlobe3D'
+import SectionHeader from '../ui/SectionHeader'
+import { METRICS as SITE, format } from '../../data/metrics'
 
 const STACKS = [
   {
@@ -23,9 +25,9 @@ const STACKS = [
 ]
 
 const METRICS = [
-  { value: '18+', label: 'Technologies' },
-  { value: '5+',  label: 'Years Expertise' },
-  { value: '60+', label: 'Projects Shipped' },
+  { value: '18+', label: 'Technologies' },                       // local to this section
+  { value: format('years'),    label: SITE.years.label },
+  { value: format('projects'), label: SITE.projects.label },
 ]
 
 const fade = (delay = 0) => ({
@@ -44,40 +46,14 @@ export default function TechGlobeSection() {
 
       <div className="container relative z-10">
 
-        {/* ── Full-width header ── */}
-        <motion.div {...fade(0)} className="mb-14 flex items-start justify-between gap-8">
-          <div className="flex-1">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg mb-5"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--primary)' }} />
-              <span className="font-mono text-[10px] tracking-[0.28em] uppercase"
-                style={{ color: 'var(--text-secondary)' }}>Technology Stack</span>
-            </div>
-
-            <h2 className="section-title mb-4">Our Stack</h2>
-
-            <p className="section-sub" style={{ maxWidth: '32rem' }}>
-              Battle-tested tools chosen for performance, developer experience,
-              and long-term maintainability — not hype cycles.
-            </p>
-          </div>
-
-          {/* Watermark + live count */}
-          <div className="hidden lg:flex flex-col items-end gap-4 shrink-0">
-            <span
-              className="font-syne font-extrabold"
-              style={{ fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1, color: 'transparent',
-                       WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}
-            >04</span>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--primary)' }} />
-              <span className="font-mono text-[10px] tracking-widest uppercase"
-                style={{ color: 'var(--text-muted)' }}>18+ technologies</span>
-            </div>
-          </div>
-        </motion.div>
+        <SectionHeader
+          num="04"
+          label="Stack"
+          title={[{ t: 'Chosen for the next five years, ' }, { t: 'not the hype cycle', em: true }]}
+          subtitle="Battle-tested tools picked for performance, developer experience and long-term maintainability."
+          inView={inView}
+          className="mb-12"
+        />
 
         <div className="grid lg:grid-cols-[3fr_2fr] gap-10 xl:gap-16 items-center">
 

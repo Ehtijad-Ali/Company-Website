@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react'
+import SectionHeader from '../ui/SectionHeader'
+import { METRICS, format } from '../../data/metrics'
 
 
 const E = [0.22, 1, 0.36, 1]
@@ -82,25 +84,13 @@ export default function Testimonials() {
     <section id="testimonials" ref={ref} className="section" style={{ background: 'var(--bg)' }}>
       <div className="container">
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: .6 }}
-          className="mb-14 flex items-end justify-between"
-        >
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 07 — Clients</p>
-            <h2 className="section-title">What They Say</h2>
-          </div>
-          <span
-            className="font-syne font-extrabold hidden lg:block"
-            style={{
-              fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1,
-              color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
-              letterSpacing: '-0.04em', userSelect: 'none',
-            }}
-          >07</span>
-        </motion.div>
+        <SectionHeader
+          num="08"
+          label="Clients"
+          title={[{ t: 'What they said ' }, { t: 'afterwards', em: true }]}
+          inView={inView}
+          className="mb-12"
+        />
 
         {/* Featured spotlight */}
         <motion.div
@@ -261,14 +251,11 @@ export default function Testimonials() {
           className="flex flex-wrap items-center justify-center gap-8 mb-14"
           style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '1.25rem 0' }}
         >
-          {[
-            { value: '500+', label: 'Happy Clients' },
-            { value: '98%',  label: 'Satisfaction Rate' },
-            { value: '5.0',  label: 'Average Rating' },
-            { value: '30+',  label: 'Countries Served' },
-          ].map(({ value, label }, i) => (
+          {['projects', 'satisfaction', 'rating', 'countries'].map(k => ({
+            value: format(k), label: METRICS[k].label,
+          })).map(({ value, label }, i) => (
             <div key={label} className="flex items-center gap-2">
-              <span className="font-syne font-extrabold text-lg" style={{ color: 'var(--text-primary)' }}>{value}</span>
+              <span className="tnum text-lg" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: 'var(--text-primary)' }}>{value}</span>
               <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>{label}</span>
             </div>
           ))}

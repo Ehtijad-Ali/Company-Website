@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import SectionHeader from '../ui/SectionHeader'
+import { format } from '../../data/metrics'
 
 /* Sectors carry no brand colours of their own, so they step through the
    palette's own ramp instead of a borrowed rainbow. */
@@ -91,22 +93,12 @@ export default function MarqueeSection() {
         style={{ background: 'linear-gradient(-90deg, var(--bg-surface), transparent)' }} />
 
       <div className="container relative z-10 mb-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="flex items-end justify-between"
-        >
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
-              style={{ color: 'var(--text-muted)' }}>/ 06 — Reach</p>
-            <h2 className="section-title">Powering products<br />across every industry.</h2>
-          </div>
-          <span className="font-syne font-extrabold hidden lg:block"
-            style={{ fontSize: 'clamp(4rem,7vw,7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}>
-            06
-          </span>
-        </motion.div>
+        <SectionHeader
+          num="06"
+          label="Reach"
+          title={[{ t: 'Products shipped across ' }, { t: 'twelve industries', em: true }]}
+          inView={inView}
+        />
       </div>
 
       {/* Rows */}
@@ -131,10 +123,10 @@ export default function MarqueeSection() {
             No matter the domain — we've shipped production-ready software in it.
           </p>
           <div className="flex gap-6 shrink-0">
-            {[['12+', 'Industries'], ['18+', 'Countries'], ['60+', 'Clients']].map(([val, lbl]) => (
+            {[['industries', 'Industries'], ['countries', 'Countries'], ['projects', 'Projects']].map(([key, lbl]) => (
               <div key={lbl} className="text-center">
-                <p className="font-syne font-extrabold text-2xl leading-none"
-                  style={{ color: 'var(--text-primary)' }}>{val}</p>
+                <p className="tnum text-2xl leading-none"
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: 'var(--text-primary)' }}>{format(key)}</p>
                 <p className="font-mono text-[9px] uppercase tracking-widest mt-1"
                   style={{ color: 'var(--text-muted)' }}>{lbl}</p>
               </div>
