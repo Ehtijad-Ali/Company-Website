@@ -23,7 +23,7 @@ export default function Footer() {
   const hasOwnCTA = pathname === '/'
 
   return (
-    <footer className="relative pt-20 pb-10" style={{ background:'var(--bg)', borderTop:'1px solid var(--border)' }}>
+    <footer className="relative pt-20 footer-fab-clear" style={{ background:'var(--bg)', borderTop:'1px solid var(--border)' }}>
       <div className="container relative z-10">
         {/* CTA banner — suppressed on routes that close with their own CTA */}
         {!hasOwnCTA && <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
@@ -113,7 +113,7 @@ export default function Footer() {
         style={{ paddingLeft: 'max(1.5rem, calc((100% - 1200px) / 2 + 1.5rem))', marginBottom: '-0.25rem' }}>
         <span style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(80px, 17vw, 230px)',
+          fontSize: 'clamp(2.25rem, 16vw, 230px)',
           fontWeight: 500,
           letterSpacing: '-0.045em',
           lineHeight: 0.88,

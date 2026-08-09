@@ -571,6 +571,16 @@ html.dark {
     .legal-body { padding-left: 2.1rem; }
   }
 
+  /* The chat launcher is fixed at bottom-right (1.75rem offset + 54px).
+     Without clearance it covers whatever ends the page — on narrow screens
+     that was the last letter of the footer watermark. */
+  /* Derived from the launcher's own geometry: 1.75rem offset + 54px button
+     + a 1rem gap. Anything less and it clips the last line of the footer. */
+  .footer-fab-clear { padding-bottom: 2.5rem; }
+  @media (max-width: 640px) {
+    .footer-fab-clear { padding-bottom: calc(1.75rem + 54px + 1.75rem); }
+  }
+
   /* Fact strip — hairline-separated key/value pairs */
   .fact-grid {
     display: grid;

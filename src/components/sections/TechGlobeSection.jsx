@@ -55,7 +55,7 @@ export default function TechGlobeSection() {
           className="mb-12"
         />
 
-        <div className="grid lg:grid-cols-[3fr_2fr] gap-10 xl:gap-16 items-center">
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-10 xl:gap-16 items-center [&>*]:min-w-0">
 
           {/* ── Left: Globe ── */}
           <motion.div

@@ -341,6 +341,7 @@ export default function TechGlobe3D() {
         height={580}
         style={{
           width: '100%',
+          maxWidth: '100%',   // the 620px intrinsic width must never set a floor
           height: 'auto',
           display: 'block',
           borderRadius: 16,
