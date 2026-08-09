@@ -154,7 +154,7 @@ function MarqueeRow({ items, reverse = false, speed = 35, variant = 'default' })
   const pill = {
     default: {
       padding: '0.7rem 1.6rem', borderRadius: '999px', border: '1px solid var(--border)',
-      background: 'var(--bg-card)', fontFamily: 'Syne, Montserrat, sans-serif',
+      background: 'var(--bg-card)', fontFamily: 'var(--font-display)',
       fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)',
       whiteSpace: 'nowrap', letterSpacing: '-0.01em',
     },
@@ -166,7 +166,7 @@ function MarqueeRow({ items, reverse = false, speed = 35, variant = 'default' })
     },
     label: {
       padding: '0.55rem 1.4rem', borderRadius: '999px', border: '1px solid transparent',
-      background: 'var(--bg-surface)', fontFamily: 'Syne, Montserrat, sans-serif',
+      background: 'var(--bg-surface)', fontFamily: 'var(--font-display)',
       fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-secondary)',
       whiteSpace: 'nowrap', letterSpacing: '-0.01em',
     },
@@ -301,7 +301,7 @@ function TimelineCard({ project, i, fromRight }) {
       {/* Footer */}
       <div style={{ padding: '0.875rem 1rem', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <p style={{ fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', margin: 0 }}>{project.title}</p>
+          <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', margin: 0 }}>{project.title}</p>
           <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem', color: 'var(--text-secondary)', marginTop: '0.15rem' }}>{project.client}</p>
         </div>
         <div style={{
@@ -361,7 +361,7 @@ function YearBlock({ group, yi }) {
           style={{ marginBottom: '1.5rem' }}
         >
           <span style={{
-            fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 800,
+            fontFamily: 'var(--font-display)', fontWeight: 800,
             fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1,
             color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
           }}>{group.year}</span>

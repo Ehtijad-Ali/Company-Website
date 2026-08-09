@@ -493,6 +493,74 @@ html.dark {
     background: var(--divider);
     border: 0;
   }
+
+  /* ── Editorial ────────────────────────────────────────
+     Long-form typography. Used on About, where the page is
+     meant to read like a printed feature rather than a deck. */
+
+  /* Drop cap. `initial-letter` does the work in Safari/Chrome; the float
+     fallback keeps Firefox from rendering an oversized inline glyph. */
+  .dropcap > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--brand);
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+    margin-right: 0.09em;
+  }
+  @supports not (initial-letter: 3) {
+    .dropcap > p:first-of-type::first-letter {
+      float: left;
+      font-size: 3.4em;
+      line-height: 0.86;
+      padding: 0.06em 0.09em 0 0;
+    }
+  }
+
+  /* Measure — long-form body copy wants ~65 characters, not full width */
+  .prose-measure { max-width: 62ch; }
+  .prose-measure p + p { margin-top: 1.1em; }
+  .prose-measure p {
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  /* Pull quote — the mark hangs into the left margin, as it would in print */
+  .pull-quote {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    padding-left: 1.4em;
+    text-wrap: balance;
+  }
+  .pull-quote::before {
+    content: '\201C';
+    position: absolute;
+    left: 0;
+    top: -0.06em;
+    font-size: 2.6em;
+    line-height: 1;
+    color: var(--brand);
+    opacity: 0.55;
+  }
+
+  /* Fact strip — hairline-separated key/value pairs */
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-top: 1px solid var(--divider);
+  }
+  .fact-grid > * {
+    padding: 1.25rem 1.5rem 1.25rem 0;
+    border-bottom: 1px solid var(--divider);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════

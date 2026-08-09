@@ -133,7 +133,7 @@ function SectionGroup({ group, gi }) {
                     {/* Label */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
                       <p style={{
-                        fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 700,
+                        fontFamily: 'var(--font-display)', fontWeight: 700,
                         fontSize: '0.95rem', color: 'var(--text-primary)', margin: 0,
                       }}>{page.label}</p>
                       {!isCurrent && (
@@ -173,7 +173,7 @@ export default function SitemapPage() {
         <span className="hidden lg:block" style={{
           position: 'absolute', right: 'max(1.5rem, calc((100% - 1200px)/2 + 1.5rem))',
           top: '50%', transform: 'translateY(-50%)',
-          fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 800,
+          fontFamily: 'var(--font-display)', fontWeight: 800,
           fontSize: 'clamp(6rem, 14vw, 15rem)', lineHeight: 1,
           color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
           letterSpacing: '-0.04em', userSelect: 'none', pointerEvents: 'none',
@@ -192,7 +192,7 @@ export default function SitemapPage() {
               </span>
             </div>
             <h1 style={{
-              fontFamily: 'Nasalization, Montserrat, sans-serif', fontWeight: 800,
+              fontFamily: 'var(--font-display)', fontWeight: 500,
               fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', letterSpacing: '-0.02em',
               color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1rem',
             }}>Every Page, One Place</h1>
@@ -230,7 +230,7 @@ export default function SitemapPage() {
               background: 'var(--bg-card)',
             }}>
               <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.58rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>{stat.label}</p>
-              <p style={{ fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', margin: 0 }}>{stat.value}</p>
+              <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', margin: 0 }}>{stat.value}</p>
             </div>
           ))}
         </motion.div>

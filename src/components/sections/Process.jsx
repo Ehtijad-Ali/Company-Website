@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import SectionHeader from '../ui/SectionHeader'
 import { MessageSquare, Lightbulb, Layers, Rocket, BarChart2 } from 'lucide-react'
 
 const E = [0.22, 1, 0.36, 1]
@@ -72,8 +73,8 @@ function StepCard({ icon: Icon, num, title, phase, desc, deliverables }) {
           </div>
         </div>
         <span
-          className="font-syne font-extrabold text-4xl leading-none shrink-0 select-none"
-          style={{ color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)' }}
+          className="tnum text-4xl leading-none shrink-0 select-none"
+          style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: 'var(--brand)', opacity: 0.4 }}
         >{num}</span>
       </div>
 
@@ -101,35 +102,19 @@ export default function Process({ num = '03' }) {
       <div className="container">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: .6 }}
-          className="mb-16 flex items-end justify-between gap-6"
-        >
-          <div className="flex-1">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ {num} — Process</p>
-            <h2 className="section-title mb-4">Our Process</h2>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <p className="section-sub max-w-lg">
-                A proven five-phase framework that turns ideas into high-performance products — on time, every time.
-              </p>
-              <div
-                className="flex items-center gap-2 px-4 py-2 rounded-full shrink-0 self-start sm:self-auto"
-                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-                  5 phases · ~12 weeks
-                </span>
-              </div>
-            </div>
-          </div>
-          <span
-            className="font-syne font-extrabold hidden lg:block shrink-0"
-            style={{ fontSize: 'clamp(4rem, 7vw, 7rem)', lineHeight: 1, color: 'transparent',
-                     WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em', userSelect: 'none' }}
-          >{num}</span>
-        </motion.div>
+        <SectionHeader
+          num={num}
+          label="Process"
+          title={[{ t: 'Five phases, ' }, { t: 'no surprises', em: true }]}
+          subtitle="A framework that turns an idea into a shipped product, with a checkpoint you can act on at the end of each phase."
+          inView={inView}
+          className="mb-4"
+        />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-14"
+          style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--r-full)' }}>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--brand)' }} />
+          <span className="eyebrow" style={{ fontSize: '0.5625rem' }}>5 phases · ~12 weeks</span>
+        </div>
 
         {/* Timeline */}
         <div className="relative">

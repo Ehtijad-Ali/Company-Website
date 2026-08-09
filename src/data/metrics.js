@@ -24,6 +24,15 @@ export const METRICS = {
   years:        { value: 10,  suffix: '+',  label: 'Years in practice' },
 }
 
+/**
+ * Founding year. The About page previously ran a 2014–2024 timeline claiming
+ * 500 projects and 50+ staff, while its own prose said "we started in 2024"
+ * and "in our first year". 2014 is consistent with `years` above; the numbers
+ * around it are now the boutique ones the rest of the site states.
+ */
+export const FOUNDED = 2014
+export const TEAM_SIZE = 12
+
 /** "60+", "$50M+", "4.9★" — one formatter so every surface renders alike. */
 export const format = key => {
   const m = METRICS[key]

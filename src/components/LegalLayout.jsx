@@ -25,7 +25,7 @@ function SectionBlock({ section, i, onInView }) {
           color: 'var(--text-muted)', paddingTop: '0.45rem', flexShrink: 0,
         }}>{String(i + 1).padStart(2, '0')}</span>
         <h2 style={{
-          fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 700, fontSize: '1.2rem',
+          fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.2rem',
           color: 'var(--text-primary)', margin: 0, lineHeight: 1.3,
         }}>{section.title}</h2>
       </div>
@@ -81,7 +81,7 @@ export default function LegalLayout({ badge, title, tagline, updated, number, se
         <span className="hidden lg:block" style={{
           position: 'absolute', right: 'max(1.5rem, calc((100% - 1200px)/2 + 1.5rem))',
           top: '50%', transform: 'translateY(-50%)',
-          fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 800,
+          fontFamily: 'var(--font-display)', fontWeight: 800,
           fontSize: 'clamp(6rem, 14vw, 15rem)', lineHeight: 1,
           color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
           letterSpacing: '-0.04em', userSelect: 'none', pointerEvents: 'none',
@@ -101,7 +101,7 @@ export default function LegalLayout({ badge, title, tagline, updated, number, se
           </div>
 
           <h1 style={{
-            fontFamily: 'Nasalization, Montserrat, sans-serif', fontWeight: 800,
+            fontFamily: 'var(--font-display)', fontWeight: 500,
             fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', letterSpacing: '-0.02em',
             color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1rem',
           }}>{title}</h1>
@@ -127,7 +127,7 @@ export default function LegalLayout({ badge, title, tagline, updated, number, se
                   <button onClick={() => scrollTo(s.id)} style={{
                     display: 'block', width: '100%', textAlign: 'left',
                     padding: '0.45rem 0.75rem', borderRadius: '8px',
-                    fontFamily: 'Syne, Montserrat, sans-serif',
+                    fontFamily: 'var(--font-display)',
                     fontSize: '0.78rem', fontWeight: active === s.id ? 600 : 400,
                     color: active === s.id ? 'var(--text-primary)' : 'var(--text-muted)',
                     background: active === s.id ? 'var(--bg-card)' : 'transparent',
@@ -149,7 +149,7 @@ export default function LegalLayout({ badge, title, tagline, updated, number, se
             <div style={{ marginTop: '1.5rem', padding: '1.25rem', borderRadius: '14px', background: 'var(--bg-card)', border: '1px solid var(--border)', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
               <span style={{ fontSize: '1rem', flexShrink: 0 }}>📬</span>
               <div>
-                <p style={{ fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
                   Questions about this policy?
                 </p>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
