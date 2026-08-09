@@ -24,6 +24,7 @@ export default function SectionHeader({
   subtitle,
   action,       // { to, label }
   align = 'split',  // 'split' puts the action opposite the heading; 'stack' drops it below
+  as: Tag = 'h2',   // page-top headings pass as="h1" so each page has exactly one
   inView = true,
   className = '',
 }) {
@@ -45,13 +46,13 @@ export default function SectionHeader({
           </p>
         )}
 
-        <h2 className="section-title">
+        <Tag className="section-title">
           {parts.map((p, i) =>
             p.em
               ? <em key={i} style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>{p.t}</em>
               : <span key={i}>{p.t}</span>
           )}
-        </h2>
+        </Tag>
 
         {subtitle && <p className="section-sub mt-4">{subtitle}</p>}
       </div>

@@ -1,5 +1,7 @@
 ﻿import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
+import SectionHeader from '../components/ui/SectionHeader'
+import { format } from '../data/metrics'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Github, ExternalLink, ArrowRight, MessageSquare, Layers, Rocket } from 'lucide-react'
 
@@ -53,16 +55,14 @@ export default function PortfolioPage() {
       {/* Grid */}
       <section className="section pt-36" style={{ background:'var(--bg-surface)' }}>
         <div className="container">
-          <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.6 }}
-            className="mb-14">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color:'var(--text-muted)' }}>/ 01 — Portfolio</p>
-            <div className="flex items-end gap-6">
-              <h1 className="section-title shrink-0">Our Work</h1>
-              <div className="flex-1 h-px mb-2.5" style={{ background:'var(--border)' }} />
-              <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-                style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>01</span>
-            </div>
-          </motion.div>
+          <SectionHeader
+            num="01"
+            label="Portfolio"
+            title={[{ t: 'Work we can ' }, { t: 'point at', em: true }]}
+            subtitle="Selected engagements across fintech, health, e-commerce and SaaS — each with the outcome it was measured on."
+            as="h1"
+            className="mb-12"
+          />
 
           {/* Filter */}
           <div className="flex flex-wrap gap-2 mb-10">
@@ -198,23 +198,14 @@ function ImpactMarqueeSection() {
       `}</style>
 
       {/* Header */}
-      <motion.div
-        className="container"
-        initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        style={{ marginBottom: '3.5rem' }}
-      >
-        <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 02 — Impact</p>
-        <div className="flex items-end gap-6">
-          <h2 className="section-title shrink-0">Results That Speak</h2>
-          <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-          <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-            style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>02</span>
-        </div>
-        <p className="mt-4 text-sm leading-relaxed max-w-lg" style={{ color: 'var(--text-secondary)' }}>
-          Every line of code we ship is tied to a measurable outcome. Here's what that looks like in aggregate.
-        </p>
-      </motion.div>
+      <SectionHeader
+        num="02"
+        label="Impact"
+        title={[{ t: 'Results that ' }, { t: 'held up', em: true }]}
+        subtitle="Every engagement is tied to a measurable outcome. Here is what that looks like in aggregate."
+        inView={inView}
+        className="mb-12"
+      />
 
       {/* Three marquee rows */}
       <motion.div
@@ -361,9 +352,9 @@ function YearBlock({ group, yi }) {
           style={{ marginBottom: '1.5rem' }}
         >
           <span style={{
-            fontFamily: 'var(--font-display)', fontWeight: 800,
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1,
-            color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
+            fontFamily: 'var(--font-display)', fontWeight: 500,
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.035em', lineHeight: 1,
+            color: 'var(--brand)', opacity: 0.32,
           }}>{group.year}</span>
         </motion.div>
 
@@ -387,22 +378,14 @@ function ProjectTimeline() {
       <div className="container">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: '4rem' }}
-        >
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 03 — Timeline</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">Built Year by Year</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>03</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-lg" style={{ color: 'var(--text-secondary)' }}>
-            A living record of what we've shipped — from our earliest platforms to the AI-native products we build today.
-          </p>
-        </motion.div>
+        <SectionHeader
+          num="03"
+          label="Timeline"
+          title={[{ t: 'Built ' }, { t: 'year by year', em: true }]}
+          subtitle="A living record of what we have shipped, from the earliest platforms to the AI-native products we build now."
+          inView={inView}
+          className="mb-12"
+        />
 
         {/* Timeline blocks */}
         <div>
@@ -432,22 +415,14 @@ function StartProjectSection() {
     <section ref={ref} className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
       <div className="container">
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-14"
-        >
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 04 — Start</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">Ready to build?</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize: 'clamp(3.5rem,6vw,6rem)', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em' }}>04</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            Every project in this portfolio started with a single conversation. Yours can too.
-          </p>
-        </motion.div>
+        <SectionHeader
+          num="04"
+          label="Start"
+          title={[{ t: 'Every project here started with ' }, { t: 'one conversation', em: true }]}
+          subtitle="Yours can too. A short discovery call, an honest scope, and a milestone plan."
+          inView={inView}
+          className="mb-12"
+        />
 
         {/* Steps */}
         <div className="grid md:grid-cols-3 gap-5 mb-14">
@@ -468,7 +443,8 @@ function StartProjectSection() {
                     <Icon className="w-5 h-5 text-accent" />
                   </div>
                   <span className="font-syne font-extrabold select-none"
-                    style={{ fontSize: '3rem', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)' }}>{step}</span>
+                    style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '2.5rem',
+                             lineHeight: 1, color: 'var(--brand)', opacity: 0.35 }}>{step}</span>
                 </div>
                 <h3 className="font-syne font-bold text-lg mb-2" style={{ color: 'var(--text-primary)' }}>{title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{desc}</p>
@@ -485,11 +461,12 @@ function StartProjectSection() {
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
         >
           <div>
-            <h3 className="font-syne font-extrabold text-3xl md:text-4xl mb-3" style={{ color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'var(--step-3)',
+                         marginBottom: '0.75rem', color: 'var(--text-primary)', letterSpacing: '-0.025em', lineHeight: 1.15 }}>
               Let's make the next<br />case study yours.
             </h3>
             <p className="text-sm" style={{ color: 'var(--text-secondary)', maxWidth: '28rem' }}>
-              500+ projects shipped. Clients in 18 countries. A team that treats your product like it's our own.
+              {format('projects')} projects shipped, clients in {format('countries')} countries, and a team that treats your product like its own.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
