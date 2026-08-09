@@ -67,7 +67,7 @@ function StepCard({ icon: Icon, num, title, phase, desc, deliverables }) {
           <div>
             <h3 className="font-syne font-bold text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>{title}</h3>
             <span
-              className="font-mono text-[9px] uppercase tracking-widest"
+              className="font-mono text-[10px] uppercase tracking-widest"
               style={{ color: 'var(--accent)', opacity: 0.7 }}
             >{phase}</span>
           </div>
@@ -84,7 +84,7 @@ function StepCard({ icon: Icon, num, title, phase, desc, deliverables }) {
         {deliverables.map(d => (
           <span
             key={d}
-            className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full"
+            className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
             style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text-muted)' }}
           >{d}</span>
         ))}
@@ -113,7 +113,7 @@ export default function Process({ num = '03' }) {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-14"
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--r-full)' }}>
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--brand)' }} />
-          <span className="eyebrow" style={{ fontSize: '0.5625rem' }}>5 phases · ~12 weeks</span>
+          <span className="eyebrow" style={{ fontSize: '0.625rem' }}>5 phases · ~12 weeks</span>
         </div>
 
         {/* Timeline */}
@@ -173,7 +173,7 @@ export default function Process({ num = '03' }) {
                     >
                       <Icon className="w-4 h-4" style={{ color: 'var(--accent)' }} />
                     </motion.div>
-                    <span className="font-mono text-[9px] mt-2 tracking-widest" style={{ color: 'var(--text-muted)' }}>{num}</span>
+                    <span className="font-mono text-[10px] mt-2 tracking-widest" style={{ color: 'var(--text-muted)' }}>{num}</span>
                   </div>
 
                   {/* Desktop right slot */}

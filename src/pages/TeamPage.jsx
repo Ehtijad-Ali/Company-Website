@@ -145,6 +145,7 @@ export default function TeamPage() {
                   fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.08em',
                   textTransform: 'uppercase', color: 'var(--text-secondary)',
                   background: 'transparent', border: 'none', cursor: 'pointer', outline: 'none',
+                  minHeight: 44,  // native selects collapse to ~16px on mobile
                 }}>
                 {SORTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
               </select>
@@ -222,7 +223,7 @@ function JoinUsSection() {
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
                       <h3 className="font-syne font-bold text-base" style={{ color: 'var(--text-primary)' }}>{role.title}</h3>
-                      <span className="chip text-[9px]">{role.dept}</span>
+                      <span className="chip text-[10px]">{role.dept}</span>
                     </div>
                     <p className="font-mono text-[10px] mb-2" style={{ color: 'var(--text-muted)' }}>{role.type}</p>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{role.desc}</p>

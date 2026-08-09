@@ -367,7 +367,7 @@ function Culture() {
                 <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
                   {FOUNDER.name}
                 </p>
-                <p className="eyebrow" style={{ fontSize: '0.5625rem', marginTop: '0.15rem' }}>{FOUNDER.role}</p>
+                <p className="eyebrow" style={{ fontSize: '0.625rem', marginTop: '0.15rem' }}>{FOUNDER.role}</p>
               </div>
             </Link>
           </motion.div>
@@ -387,7 +387,7 @@ function Culture() {
                   className="flex items-baseline gap-4"
                   style={{ padding: '0.875rem 0', borderBottom: i < BELIEFS.length - 1 ? '1px solid var(--divider)' : 'none' }}
                 >
-                  <span className="eyebrow shrink-0" style={{ width: '1.5rem', fontSize: '0.5625rem' }}>
+                  <span className="eyebrow shrink-0" style={{ width: '1.5rem', fontSize: '0.625rem' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'var(--text-secondary)' }}>{b}</p>

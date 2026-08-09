@@ -58,7 +58,7 @@ export default function SectionHeader({
       </div>
 
       {action && align === 'split' && (
-        <Link to={action.to} className="shrink-0 flex items-center gap-2 mb-1 text-sm"
+        <Link to={action.to} className="tap shrink-0 flex items-center gap-2 mb-1 text-sm"
           style={{ color: 'var(--text-secondary)' }}>
           {action.label}
           <span style={{

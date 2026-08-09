@@ -551,6 +551,26 @@ html.dark {
     opacity: 0.55;
   }
 
+  /* Legal document layout — sidebar collapses to a single column below lg,
+     where a sticky mobile contents bar takes over instead. */
+  .legal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .legal-grid {
+      grid-template-columns: 13rem minmax(0, 54rem);
+      gap: 3.5rem;
+    }
+  }
+  /* The number gutter is a desktop luxury; on a phone it costs real measure */
+  .legal-body { padding-left: 0; }
+  @media (min-width: 640px) {
+    .legal-body { padding-left: 2.1rem; }
+  }
+
   /* Fact strip — hairline-separated key/value pairs */
   .fact-grid {
     display: grid;
@@ -904,7 +924,43 @@ html.dark .glass-strong {
 .input:focus-visible { outline: none; }
 
 /* ═══════════════════════════════════════════════════════════
-   11 · REDUCED MOTION
+   11 · TOUCH TARGETS & SMALL-SCREEN LEGIBILITY
+   ═══════════════════════════════════════════════════════════
+   Audited on a 393px viewport: footer links rendered 17px tall,
+   filter tabs 28–30px, and inline action links 18–20px — all under
+   the ~44px Apple/Material recommendation and WCAG 2.5.8's 24px
+   floor. These pad the hit area without moving any text. */
+@media (max-width: 1023px) {
+  /* Filter tabs (Team, Blog, Portfolio) — already flex, so min-height
+     grows the box around the label rather than shifting it. */
+  button.eyebrow {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Footer navigation columns */
+  footer nav a,
+  footer ul a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  /* Inline text links that act as buttons */
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* 9px uppercase mono is legible on a desktop monitor and not on a
+     phone held at arm's length. Raise the floor for label text. */
+  .eyebrow { font-size: 0.6875rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   12 · REDUCED MOTION
    ═══════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

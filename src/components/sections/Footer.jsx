@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center mb-5 group" style={{ textDecoration: 'none' }}>
+            <Link to="/" className="tap flex items-center mb-5 group" style={{ textDecoration: 'none' }}>
               <CodeNodeLogo height={28} />
             </Link>
             <p className="text-sm leading-relaxed mb-6 max-w-xs" style={{ color:'var(--text-secondary)' }}>
@@ -73,10 +73,10 @@ export default function Footer() {
           {Object.entries(NAV).map(([title, links]) => (
             <div key={title}>
               <p className="font-mono text-[10px] uppercase tracking-wider mb-5" style={{ color:'var(--text-secondary)' }}>{title}</p>
-              <ul className="space-y-3">
+              <ul className="space-y-1 lg:space-y-3">
                 {links.map(([label, to]) => (
                   <li key={label}>
-                    <Link to={to} className="text-sm transition-colors hover:text-accent"
+                    <Link to={to} className="tap text-sm transition-colors hover:text-accent"
                       style={{ color:'var(--text-secondary)' }}>{label}</Link>
                   </li>
                 ))}
@@ -101,7 +101,7 @@ export default function Footer() {
             ))}
           </div>
           <button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
-            className="flex items-center gap-2 font-mono text-xs transition-colors hover:text-accent"
+            className="tap flex items-center gap-2 font-mono text-xs transition-colors hover:text-accent"
             style={{ color:'var(--text-secondary)' }}>
             <ArrowUp className="w-3.5 h-3.5" />Back to top
           </button>

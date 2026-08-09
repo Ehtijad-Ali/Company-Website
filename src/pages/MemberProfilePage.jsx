@@ -27,7 +27,7 @@ function Stat({ label, value }) {
         fontFamily: 'var(--font-display)', fontSize: 'var(--step-1)',
         fontWeight: 500, lineHeight: 1.1, color: 'var(--text-primary)',
       }}>{value}</p>
-      <p className="eyebrow" style={{ fontSize: '0.5625rem', marginTop: '0.25rem' }}>{label}</p>
+      <p className="eyebrow" style={{ fontSize: '0.625rem', marginTop: '0.25rem' }}>{label}</p>
     </div>
   )
 }
@@ -178,7 +178,7 @@ export default function MemberProfilePage() {
                     <li key={l.name} className="flex items-center justify-between gap-4"
                       style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
                       <span>{l.name}</span>
-                      <span className="eyebrow" style={{ fontSize: '0.5625rem' }}>{l.level}</span>
+                      <span className="eyebrow" style={{ fontSize: '0.625rem' }}>{l.level}</span>
                     </li>
                   ))}
                 </ul>
@@ -264,7 +264,7 @@ export default function MemberProfilePage() {
                     <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.9375rem', fontWeight: 500, color: 'var(--text-primary)' }}>
                       {r.name}
                     </p>
-                    <p className="eyebrow" style={{ fontSize: '0.5625rem', marginTop: 2 }}>{r.role}</p>
+                    <p className="eyebrow" style={{ fontSize: '0.625rem', marginTop: 2 }}>{r.role}</p>
                     <p className="tnum" style={{ fontSize: '0.8125rem', color: 'var(--brand)', marginTop: 4 }}>
                       {formatRate(r.rate)}/hr
                     </p>

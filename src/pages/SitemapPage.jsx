@@ -168,16 +168,10 @@ export default function SitemapPage() {
     <div style={{ background: 'var(--bg-surface)', minHeight: '100vh', paddingBottom: '6rem' }}>
 
       {/* Hero */}
-      <div style={{ background: 'var(--bg)', borderBottom: '1px solid var(--border)', paddingTop: '7rem', paddingBottom: '4rem', position: 'relative', overflow: 'hidden' }}>
-        {/* Ghost text */}
-        <span className="hidden lg:block" style={{
-          position: 'absolute', right: 'max(1.5rem, calc((100% - 1200px)/2 + 1.5rem))',
-          top: '50%', transform: 'translateY(-50%)',
-          fontFamily: 'var(--font-display)', fontWeight: 800,
-          fontSize: 'clamp(6rem, 14vw, 15rem)', lineHeight: 1,
-          color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)',
-          letterSpacing: '-0.04em', userSelect: 'none', pointerEvents: 'none',
-        }}>04</span>
+      <div style={{ background: 'var(--bg)', borderBottom: '1px solid var(--border)', paddingTop: 'clamp(6rem, 14vw, 7rem)', paddingBottom: 'clamp(2.5rem, 7vw, 4rem)', position: 'relative', overflow: 'hidden' }}>
+        <div className="pointer-events-none absolute inset-0" style={{
+          background: 'radial-gradient(ellipse 60% 80% at 88% 30%, var(--accent-glow), transparent 70%)',
+        }} />
 
         <div className="container relative z-10" ref={heroRef}>
           <motion.div
@@ -193,10 +187,10 @@ export default function SitemapPage() {
             </div>
             <h1 style={{
               fontFamily: 'var(--font-display)', fontWeight: 500,
-              fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', letterSpacing: '-0.02em',
+              fontSize: 'var(--step-5)', letterSpacing: '-0.028em',
               color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1rem',
-            }}>Every Page, One Place</h1>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', maxWidth: '36rem', lineHeight: 1.75 }}>
+            }}>Every page, <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>one place</em></h1>
+            <p className="section-sub" style={{ maxWidth: '52ch' }}>
               A structured overview of the CodeNode website. Use this to find exactly what you are looking for — or to get a bird's-eye view of everything we offer.
             </p>
           </motion.div>

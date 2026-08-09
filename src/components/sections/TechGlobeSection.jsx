@@ -79,7 +79,7 @@ export default function TechGlobeSection() {
                   style={{ borderBottom: '1px solid var(--border)' }}
                 >
                   {/* Label */}
-                  <span className="font-mono text-[9px] tracking-[0.22em] uppercase w-20 shrink-0"
+                  <span className="font-mono text-[10px] tracking-[0.22em] uppercase w-20 shrink-0"
                     style={{ color: 'var(--text-muted)' }}>
                     {stack.label}
                   </span>
@@ -121,7 +121,7 @@ export default function TechGlobeSection() {
                   <div key={label}>
                     <p className="font-syne font-extrabold text-2xl"
                       style={{ color: 'var(--text-primary)', lineHeight: 1 }}>{value}</p>
-                    <p className="font-mono text-[9px] uppercase tracking-widest mt-1.5"
+                    <p className="font-mono text-[10px] uppercase tracking-widest mt-1.5"
                       style={{ color: 'var(--text-muted)' }}>{label}</p>
                   </div>
                 ))}
@@ -131,7 +131,7 @@ export default function TechGlobeSection() {
               <motion.a
                 href="#services"
                 whileHover={{ gap: '0.75rem' }}
-                className="flex items-center gap-2 text-sm font-semibold shrink-0"
+                className="tap flex items-center gap-2 text-sm font-semibold shrink-0"
                 style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               >
                 Explore services

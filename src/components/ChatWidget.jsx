@@ -170,7 +170,7 @@ export default function ChatWidget() {
                   }}>
                     CodeNode assistant
                   </p>
-                  <p className="eyebrow" style={{ fontSize: '0.5625rem', letterSpacing: '0.14em' }}>
+                  <p className="eyebrow" style={{ fontSize: '0.625rem', letterSpacing: '0.14em' }}>
                     {aiOn ? 'Ask anything' : 'Common questions'}
                   </p>
                 </div>

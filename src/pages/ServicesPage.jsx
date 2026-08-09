@@ -91,7 +91,7 @@ export default function ServicesPage() {
                         </div>
                       ))}
                     </div>
-                    <button onClick={openContact} className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all" style={{ color:'var(--accent)', background:'none', border:'none', cursor:'pointer', padding:0, textDecoration:'underline', textUnderlineOffset:'4px' }}>
+                    <button onClick={openContact} className="tap inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all" style={{ color:'var(--accent)', background:'none', border:'none', cursor:'pointer', padding:0, textDecoration:'underline', textUnderlineOffset:'4px' }}>
                       Get a quote <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
@@ -215,7 +215,7 @@ function GuaranteeSection() {
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="font-syne font-extrabold text-4xl" style={{ color: 'var(--text-primary)' }}>{g.stat}</span>
-                    <span className="font-mono text-[9px] tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>{g.statSub}</span>
+                    <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>{g.statSub}</span>
                   </div>
                   <div className="h-px my-4" style={{ background: 'var(--border)' }} />
                   <h3 className="font-syne font-bold text-lg mb-2" style={{ color: 'var(--text-primary)' }}>{g.title}</h3>
@@ -282,7 +282,7 @@ function TechStackSection() {
               </div>
               <div className="relative z-10">
                 <p className="font-syne font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
-                <p className="font-mono text-[9px] tracking-widest uppercase mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.cat}</p>
+                <p className="font-mono text-[10px] tracking-widest uppercase mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.cat}</p>
               </div>
             </motion.div>
           ))}

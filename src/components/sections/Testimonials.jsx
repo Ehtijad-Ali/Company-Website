@@ -129,7 +129,7 @@ export default function Testimonials() {
                 <div className="w-px self-stretch" style={{ background: 'var(--border)' }} />
                 <div className="flex items-center gap-1.5 pt-1">
                   <TrendingUp className="w-3.5 h-3.5" style={{ color: 'var(--accent)' }} />
-                  <span className="font-mono text-[9px] uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Verified result</span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Verified result</span>
                 </div>
               </div>
 
@@ -186,13 +186,21 @@ export default function Testimonials() {
                     {TESTIMONIALS.map((_, i) => (
                       <button
                         key={i} onClick={() => setActive(i)}
-                        className="rounded-full transition-all duration-300"
+                        aria-label={`Go to testimonial ${i + 1}`}
+                        aria-current={i === active}
+                        className="flex items-center justify-center"
                         style={{
+                          minWidth: 44, height: 44, background: 'none',
+                          border: 'none', cursor: 'pointer', padding: 0,
+                        }}
+                      >
+                        <span className="rounded-full transition-all duration-300" style={{
+                          display: 'block',
                           width: i === active ? '1.75rem' : '0.5rem',
                           height: '0.5rem',
-                          background: i === active ? 'var(--accent)' : 'var(--border)',
-                        }}
-                      />
+                          background: i === active ? 'var(--brand)' : 'var(--border)',
+                        }} />
+                      </button>
                     ))}
                   </div>
 
@@ -212,7 +220,7 @@ export default function Testimonials() {
               className="hidden lg:flex flex-col justify-center gap-1.5 p-6"
               style={{ borderLeft: '1px solid var(--border)', background: 'var(--bg-surface)' }}
             >
-              <p className="font-mono text-[9px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>All clients</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>All clients</p>
               {TESTIMONIALS.map((c, i) => (
                 <motion.button
                   key={i}
@@ -231,7 +239,7 @@ export default function Testimonials() {
                   />
                   <div className="min-w-0 flex-1">
                     <p className="font-syne font-semibold text-xs truncate" style={{ color: i === active ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{c.name}</p>
-                    <p className="font-mono text-[9px] truncate" style={{ color: 'var(--text-muted)' }}>{c.company}</p>
+                    <p className="font-mono text-[10px] truncate" style={{ color: 'var(--text-muted)' }}>{c.company}</p>
                   </div>
                   {i === active && (
                     <span className="font-syne font-bold text-xs shrink-0" style={{ color: 'var(--accent)' }}>
