@@ -14,24 +14,22 @@ const E = [0.22, 1, 0.36, 1]
 const FOUNDER = TEAM.find(m => m.role.includes('Founder')) ?? TEAM[0]
 
 /**
- * Timeline rewritten around the numbers the rest of the site states.
- * It used to claim 100 projects by 2016, 50+ staff and 500 projects shipped —
- * against a 12-person roster and 60+ projects — while the prose beside it
- * said the studio started in 2024. This is the boutique version, which is
- * also the positioning the home page already sells.
+ * Timeline for a studio founded in 2025 — roughly eighteen months of history,
+ * so these are quarters rather than years. Keep it honest: a short list of
+ * real decisions reads better than a padded decade.
  */
 const MILESTONES = [
-  { year: '2014', title: 'Three people, one rule',
-    event: 'Founded on a simple constraint: never take on more work than the founders could personally review.' },
-  { year: '2017', title: 'The first refusal',
-    event: 'Turned down our largest enquiry to date because we could not staff it without hiring people we had not worked with.' },
-  { year: '2019', title: 'Design and engineering merge',
+  { year: 'Q1 2025', title: 'Four people, one rule',
+    event: 'Founded on a simple constraint: never take on more work than the founders can personally review.' },
+  { year: 'Q2 2025', title: 'First platform build',
+    event: 'A logistics client took a chance on a three-month-old studio. It shipped on time and they came back.' },
+  { year: 'Q3 2025', title: 'Design and engineering merge',
     event: 'Stopped running them as separate practices. Every engagement since has had one team and no handoff.' },
-  { year: '2021', title: 'AI practice opens',
-    event: 'First production ML systems shipped, for clients in fintech and health.' },
-  { year: '2023', title: 'Remote by default',
-    event: 'Closed the last office. The team now works across 18 countries, async-first.' },
-  { year: '2025', title: 'Individually bookable',
+  { year: 'Q4 2025', title: 'The first refusal',
+    event: 'Turned down our largest enquiry to date because we could not staff it without hiring people we had not worked with.' },
+  { year: 'Q1 2026', title: 'AI practice opens',
+    event: 'First production ML systems shipped, for clients in fintech and logistics.' },
+  { year: 'Q2 2026', title: 'Individually bookable',
     event: 'Opened the roster so clients can engage a single specialist by the hour, not just a whole project team.' },
 ]
 
@@ -47,7 +45,7 @@ const PRINCIPLES = [
 ]
 
 const CULTURE = [
-  { icon: Globe2,       value: '100%',  label: 'Remote-first',      desc: 'Talent across 18 countries, async-first, with no mandatory 9-to-5.' },
+  { icon: Globe2,       value: '100%',  label: 'Remote-first',      desc: 'A distributed team across six Pakistani cities, async-first, no mandatory 9-to-5.' },
   { icon: FlaskConical, value: '20%',   label: 'R&D every quarter', desc: 'Protected time each quarter for experimentation and learning.' },
   { icon: Zap,          value: '<48h',  label: 'Decision speed',    desc: 'Flat structure, no approval chains. The right person decides, fast.' },
   { icon: Heart,        value: '4.9/5', label: 'Team satisfaction', desc: 'Measured twice a year. We publish the result either way.' },
@@ -165,10 +163,10 @@ function Story() {
             className="dropcap prose-measure"
           >
             <p>
-              CodeNode began with a frustration our founders kept running into from
-              the client side: agencies that promised premium work and delivered
-              something average, wrapped in an expensive presentation. The people in
-              the pitch were rarely the people who showed up afterwards.
+              CodeNode began in 2025 with a frustration our founders kept running
+              into from the client side: agencies that promised premium work and
+              delivered something average, wrapped in an expensive presentation. The
+              people in the pitch were rarely the people who showed up afterwards.
             </p>
             <p>
               They had spent their careers at companies where design and engineering
@@ -188,14 +186,15 @@ function Story() {
             </motion.blockquote>
 
             <p>
-              That constraint shapes everything downstream. We take fewer engagements
-              than a studio our age typically would, because every one is reviewed by
+              That constraint shapes everything downstream. We deliberately take on
+              fewer engagements than we could fill, because every one is reviewed by
               someone senior end to end. We turn work down when we cannot staff it
               properly. And we say so early when a plan stops being the right one,
               which is not always the comfortable conversation.
             </p>
             <p>
-              A decade in, the thing we are obsessive about has not moved: making
+              We are early, and we would rather say so than pretend otherwise. What
+              has not moved since day one is the thing we are obsessive about: making
               things that genuinely work, and that hold up two years after launch.
             </p>
 

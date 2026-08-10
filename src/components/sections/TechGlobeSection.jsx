@@ -26,7 +26,7 @@ const STACKS = [
 
 const METRICS = [
   { value: '18+', label: 'Technologies' },                       // local to this section
-  { value: format('years'),    label: SITE.years.label },
+  { value: format('avgExperience'), label: SITE.avgExperience.label },
   { value: format('projects'), label: SITE.projects.label },
 ]
 

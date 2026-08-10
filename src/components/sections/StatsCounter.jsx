@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import SectionHeader from '../ui/SectionHeader'
 import { METRICS } from '../../data/metrics'
 
-const KEYS = ['satisfaction', 'projects', 'revenue', 'rating']
+const KEYS = ['projects', 'satisfaction', 'avgExperience', 'rating']
 const STATS = KEYS.map(k => {
   const m = METRICS[k]
   return { end: m.value, prefix: m.prefix, suffix: m.suffix, decimals: m.decimals ?? 0,

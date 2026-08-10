@@ -7,7 +7,7 @@ import { METRICS, format } from '../../data/metrics'
 
 /* Pulled from the shared source so the hero can't drift from the stats
    section again — it previously claimed 500+ projects against its 60+. */
-const STATS = ['projects', 'satisfaction', 'years', 'countries'].map(k => ({
+const STATS = ['projects', 'satisfaction', 'avgExperience', 'countries'].map(k => ({
   value: format(k),
   label: METRICS[k].label,
 }))

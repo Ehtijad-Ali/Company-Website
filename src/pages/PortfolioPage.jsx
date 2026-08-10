@@ -6,39 +6,39 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, Github, ExternalLink, ArrowRight, MessageSquare, Layers, Rocket } from 'lucide-react'
 
 const ALL_PROJECTS = [
-  { title:'NeuroCommerce', cat:'AI/ML',    year:'2024', client:'RetailMax Corp',
+  { title:'NeuroCommerce', cat:'AI/ML',    year:'2026', client:'RetailMax Corp',
     desc:'AI-powered e-commerce platform with real-time personalisation and predictive inventory. Increased revenue by 58%.',
     img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=600&fit=crop',
     tags:['React','TensorFlow','Node.js','PostgreSQL'], featured:true },
-  { title:'HealthPulse',   cat:'Mobile',   year:'2024', client:'WellPath Inc',
+  { title:'HealthPulse',   cat:'Mobile',   year:'2026', client:'WellPath Inc',
     desc:'Cross-platform health monitoring app with ML-driven biometric insights and wearable device sync.',
     img:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&h=600&fit=crop',
     tags:['React Native','Python','FastAPI'] },
-  { title:'Aether CRM',    cat:'SaaS',     year:'2024', client:'SalesForce Pro',
+  { title:'Aether CRM',    cat:'SaaS',     year:'2026', client:'SalesForce Pro',
     desc:'Next-gen CRM featuring an AI sales assistant, automated pipeline management, and predictive close rates.',
     img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&h=600&fit=crop',
     tags:['Next.js','PostgreSQL','Redis'] },
-  { title:'MetaVerse Hub', cat:'Web3',     year:'2023', client:'MetaSpace DAO',
+  { title:'MetaVerse Hub', cat:'Web3',     year:'2025', client:'MetaSpace DAO',
     desc:'Immersive 3D virtual workspace with WebXR presence and on-chain identity/ownership layer.',
     img:'https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=900&h=600&fit=crop',
     tags:['Three.js','Solidity','WebXR'], featured:true },
-  { title:'FlowDesk',      cat:'SaaS',     year:'2023', client:'Notion Alternative',
+  { title:'FlowDesk',      cat:'SaaS',     year:'2025', client:'Notion Alternative',
     desc:'Real-time collaborative design tool built in the browser. Live cursors, conflict resolution, export engine.',
     img:'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=900&h=600&fit=crop',
     tags:['WebSockets','Canvas API','React'] },
-  { title:'SkyAnalytics',  cat:'AI/ML',    year:'2023', client:'AgriTech Global',
+  { title:'SkyAnalytics',  cat:'AI/ML',    year:'2025', client:'AgriTech Global',
     desc:'Satellite imagery analysis platform powering crop yield predictions and precision agriculture at scale.',
     img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&h=600&fit=crop',
     tags:['PyTorch','GIS','FastAPI'] },
-  { title:'PayFlow',       cat:'FinTech',  year:'2022', client:'NeoBank',
-    desc:'Real-time payment processing platform handling $2B+ annually with sub-100ms transaction times.',
+  { title:'PayFlow',       cat:'FinTech',  year:'2025', client:'NeoBank',
+    desc:'Real-time payment processing platform with sub-100ms transaction times and a full audit trail.',
     img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&h=600&fit=crop',
     tags:['Node.js','Kafka','PostgreSQL'] },
-  { title:'EduSpace',      cat:'EdTech',   year:'2022', client:'LearnerLab',
+  { title:'EduSpace',      cat:'EdTech',   year:'2025', client:'LearnerLab',
     desc:'Adaptive learning platform with AI tutor, live collaboration, and personalised curriculum generation.',
     img:'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900&h=600&fit=crop',
     tags:['React','LangChain','AWS'] },
-  { title:'GreenTrack',    cat:'SaaS',     year:'2022', client:'EcoMetrics',
+  { title:'GreenTrack',    cat:'SaaS',     year:'2025', client:'EcoMetrics',
     desc:'ESG reporting and carbon tracking platform for Fortune 500 sustainability teams.',
     img:'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=600&fit=crop',
     tags:['Next.js','D3.js','Prisma'] },
@@ -144,7 +144,7 @@ export default function PortfolioPage() {
 
 /* ── Section 1: Triple-row Impact Marquee ─────────────────────────────── */
 
-const MARQUEE_ROW1 = ['58% Revenue ↑', '$2B+ Processed Annually', '4.9★ App Rating', '2.1M Active Users', '127 Projects Delivered', '99.98% Uptime SLA', '<1s Load Time', '320% Traffic Growth', '40% Faster Sales Pipeline']
+const MARQUEE_ROW1 = ['58% Revenue ↑', '4.9★ Average Rating', '31% Fewer False Positives', '24+ Projects Delivered', '99.9% Uptime', '<1s Load Time', '180% Organic Growth', '40% Faster Pipeline', '2.4x Return on Ad Spend']
 const MARQUEE_ROW2 = ['React', 'Next.js', 'TensorFlow', 'Three.js', 'Solidity', 'Python', 'Kubernetes', 'LangChain', 'WebXR', 'PostgreSQL', 'Kafka', 'D3.js', 'Framer Motion', 'Stripe', 'Redis']
 const MARQUEE_ROW3 = ['E-Commerce Platforms', 'Mobile Health Apps', 'AI Assistants', 'Web3 Experiences', 'SaaS Dashboards', 'Payment Systems', 'EdTech Platforms', 'ESG Reporting Tools', 'Computer Vision Pipelines']
 
@@ -197,15 +197,18 @@ function ImpactMarqueeSection() {
         @keyframes marquee-r { from { transform: translateX(-50%) } to { transform: translateX(0) } }
       `}</style>
 
-      {/* Header */}
-      <SectionHeader
-        num="02"
-        label="Impact"
-        title={[{ t: 'Results that ' }, { t: 'held up', em: true }]}
-        subtitle="Every engagement is tied to a measurable outcome. Here is what that looks like in aggregate."
-        inView={inView}
-        className="mb-12"
-      />
+      {/* Header — the marquee rows below stay full-bleed, so only the
+          header takes the container gutter. */}
+      <div className="container">
+        <SectionHeader
+          num="02"
+          label="Impact"
+          title={[{ t: 'Results that ' }, { t: 'held up', em: true }]}
+          subtitle="Every engagement is tied to a measurable outcome. Here is what that looks like in aggregate."
+          inView={inView}
+          className="mb-12"
+        />
+      </div>
 
       {/* Three marquee rows */}
       <motion.div
@@ -225,27 +228,19 @@ function ImpactMarqueeSection() {
 
 const TIMELINE_DATA = [
   {
-    year: '2024',
+    year: '2026',
     projects: [
       { title: 'NeuroCommerce', cat: 'AI/ML',  client: 'RetailMax Corp', result: '+58% revenue', img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&h=420&fit=crop' },
-      { title: 'HealthPulse',   cat: 'Mobile', client: 'WellPath Inc',   result: '2.1M users',   img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&h=420&fit=crop' },
+      { title: 'HealthPulse',   cat: 'Mobile', client: 'WellPath Inc',   result: '120k users',   img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&h=420&fit=crop' },
       { title: 'Aether CRM',    cat: 'SaaS',   client: 'SalesForce Pro', result: '40% faster pipeline', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=420&fit=crop' },
     ],
   },
   {
-    year: '2023',
+    year: '2025',
     projects: [
-      { title: 'MetaVerse Hub', cat: 'Web3',   client: 'MetaSpace DAO',       result: '50k DAU at launch', img: 'https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=700&h=420&fit=crop' },
-      { title: 'FlowDesk',      cat: 'SaaS',   client: 'Notion Alternative',  result: '12k beta signups',  img: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=700&h=420&fit=crop' },
+      { title: 'MetaVerse Hub', cat: 'Web3',   client: 'MetaSpace DAO',       result: '9k DAU at launch', img: 'https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=700&h=420&fit=crop' },
+      { title: 'FlowDesk',      cat: 'SaaS',   client: 'Notion Alternative',  result: '4k beta signups',  img: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=700&h=420&fit=crop' },
       { title: 'SkyAnalytics',  cat: 'AI/ML',  client: 'AgriTech Global',     result: '94% prediction accuracy', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&h=420&fit=crop' },
-    ],
-  },
-  {
-    year: '2022',
-    projects: [
-      { title: 'PayFlow',    cat: 'FinTech', client: 'NeoBank',      result: '$2B+ processed', img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&h=420&fit=crop' },
-      { title: 'EduSpace',  cat: 'EdTech',  client: 'LearnerLab',   result: '98% completion rate', img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=700&h=420&fit=crop' },
-      { title: 'GreenTrack',cat: 'SaaS',    client: 'EcoMetrics',   result: '220 enterprise clients', img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=700&h=420&fit=crop' },
     ],
   },
 ]

@@ -4,17 +4,17 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Github, ExternalLink } from 'lucide-react'
 
 const PROJECTS = [
-  { title:'NeuroCommerce', cat:'AI/ML',    year:'2024', desc:'AI-powered e-commerce with real-time personalisation and predictive inventory management.',
+  { title:'NeuroCommerce', cat:'AI/ML',    year:'2026', desc:'AI-powered e-commerce with real-time personalisation and predictive inventory management.',
     img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=600&fit=crop', tags:['React','TensorFlow','Node.js'], featured:true },
-  { title:'HealthPulse',   cat:'Mobile',   year:'2024', desc:'Cross-platform health monitoring app with ML-driven biometric insights and wearable sync.',
+  { title:'HealthPulse',   cat:'Mobile',   year:'2026', desc:'Cross-platform health monitoring app with ML-driven biometric insights and wearable sync.',
     img:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&h=600&fit=crop', tags:['React Native','Python'] },
-  { title:'Aether CRM',    cat:'SaaS',     year:'2024', desc:'Next-gen CRM featuring an AI sales assistant and automated pipeline management.',
+  { title:'Aether CRM',    cat:'SaaS',     year:'2026', desc:'Next-gen CRM featuring an AI sales assistant and automated pipeline management.',
     img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&h=600&fit=crop', tags:['Next.js','PostgreSQL'] },
-  { title:'MetaVerse Hub', cat:'Web3',     year:'2023', desc:'Immersive 3D virtual workspace with WebXR and blockchain identity layer.',
+  { title:'MetaVerse Hub', cat:'Web3',     year:'2025', desc:'Immersive 3D virtual workspace with WebXR and blockchain identity layer.',
     img:'https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=900&h=600&fit=crop', tags:['Three.js','Solidity'], featured:true },
-  { title:'FlowDesk',      cat:'SaaS',     year:'2023', desc:'Real-time collaborative design tool built entirely in the browser with live cursors.',
+  { title:'FlowDesk',      cat:'SaaS',     year:'2025', desc:'Real-time collaborative design tool built entirely in the browser with live cursors.',
     img:'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=900&h=600&fit=crop', tags:['WebSockets','Canvas API'] },
-  { title:'SkyAnalytics',  cat:'AI/ML',    year:'2023', desc:'Satellite imagery analysis platform powering agricultural decisions at enterprise scale.',
+  { title:'SkyAnalytics',  cat:'AI/ML',    year:'2025', desc:'Satellite imagery analysis platform powering agricultural decisions at enterprise scale.',
     img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&h=600&fit=crop', tags:['PyTorch','GIS'] },
 ]
 

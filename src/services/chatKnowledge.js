@@ -50,7 +50,7 @@ const INTENTS = [
     weight: 2,
     keywords: ['price', 'pricing', 'cost', 'budget', 'quote', 'how much', 'rate', 'expensive', 'afford', 'charge'],
     answer:
-      "Budgets start at $5,000 for targeted projects, and scale from there with scope.\n\nWe use fixed-price for well-scoped work and time & materials for exploratory or evolving work — we'll recommend whichever protects both sides after a discovery call.",
+      "Budgets start at $2,000 for targeted projects, and scale from there with scope.\n\nWe use fixed-price for well-scoped work and time & materials for exploratory or evolving work — we'll recommend whichever protects both sides after a discovery call.",
     chips: ['Book a discovery call', 'How long does it take?'],
   },
   {
@@ -98,7 +98,7 @@ const INTENTS = [
     weight: 2,
     keywords: ['startup', 'startups', 'enterprise', 'small business', 'mvp', 'early stage', 'founder', 'seed', 'solo'],
     answer:
-      'Both, genuinely. Engagement models run from lean MVP sprints for early-stage startups through to long-term retainers for enterprise teams.\n\nTargeted projects start around $5,000.',
+      'Both, genuinely. Engagement models run from lean MVP sprints for early-stage startups through to ongoing retainers for larger teams.\n\nTargeted projects start around $2,000.',
     chips: ['How long does an MVP take?', 'Book a discovery call'],
   },
   {
@@ -114,7 +114,7 @@ const INTENTS = [
     weight: 3,
     keywords: ['hire', 'hourly', 'per hour', 'individual', 'one person', 'freelance', 'freelancer', 'contractor', 'interview', 'book someone', 'specific person', 'rate', 'rates', 'developer for', 'designer for', 'augment'],
     answer:
-      "Yes — every specialist on the team can be engaged directly, by the hour, for a sprint, or embedded in your team.\n\nRates run from $95/hr for research through to $220/hr for strategy work. Each profile shows the rate, current availability, skills and selected work, and has a 'Request an interview' button that reaches us directly.",
+      "Yes — every specialist on the team can be engaged directly, by the hour, for a sprint, or embedded in your team.\n\nRates run from $20/hr for research through to $50/hr for strategy work. Each profile shows the rate, current availability, skills and selected work, and has a 'Request an interview' button that reaches us directly.",
     chips: ['Browse the team', 'How much does it cost?'],
   },
   {

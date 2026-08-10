@@ -173,7 +173,7 @@ const OPEN_ROLES = [
 ]
 
 const PERKS = [
-  { icon: Globe2, label: '100% Remote',         desc: 'Work from anywhere. We have teammates in 18 countries.' },
+  { icon: Globe2, label: '100% Remote',         desc: 'Work from anywhere. The team is spread across six Pakistani cities.' },
   { icon: Clock,  label: 'Async-first culture', desc: 'No mandatory stand-ups. Deep work is protected.' },
   { icon: Zap,    label: '20% R&D time',        desc: 'Dedicated learning hours built into every quarter.' },
   { icon: Heart,  label: 'Top-of-market pay',   desc: 'Competitive salary + equity + full benefits.' },
