@@ -76,7 +76,7 @@ function Card({ m, i }) {
           >
             {m.skills.slice(0, 3).map(s => (
               <span key={s.name} style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.5625rem',
+                fontFamily: 'var(--font-mono)', fontSize: '0.625rem',
                 padding: '0.2rem 0.5rem', borderRadius: 'var(--r-full)',
                 background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
                 color: 'rgba(255,255,255,0.62)',
@@ -143,7 +143,7 @@ export default function Team() {
             </p>
           </div>
           <Link to="/team"
-            className="shrink-0 mb-2 flex items-center gap-2 text-sm"
+            className="tap shrink-0 mb-2 flex items-center gap-2 text-sm"
             style={{ color: 'var(--text-secondary)' }}>
             View all {TEAM.length}
             <span style={{

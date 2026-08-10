@@ -127,7 +127,7 @@ export default function MarqueeSection() {
               <div key={lbl} className="text-center">
                 <p className="tnum text-2xl leading-none"
                   style={{ fontFamily: 'var(--font-display)', fontWeight: 500, color: 'var(--text-primary)' }}>{format(key)}</p>
-                <p className="font-mono text-[9px] uppercase tracking-widest mt-1"
+                <p className="font-mono text-[10px] uppercase tracking-widest mt-1"
                   style={{ color: 'var(--text-muted)' }}>{lbl}</p>
               </div>
             ))}

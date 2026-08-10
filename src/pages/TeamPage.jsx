@@ -145,6 +145,7 @@ export default function TeamPage() {
                   fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.08em',
                   textTransform: 'uppercase', color: 'var(--text-secondary)',
                   background: 'transparent', border: 'none', cursor: 'pointer', outline: 'none',
+                  minHeight: 44,  // native selects collapse to ~16px on mobile
                 }}>
                 {SORTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
               </select>
@@ -172,7 +173,7 @@ const OPEN_ROLES = [
 ]
 
 const PERKS = [
-  { icon: Globe2, label: '100% Remote',         desc: 'Work from anywhere. We have teammates in 18 countries.' },
+  { icon: Globe2, label: '100% Remote',         desc: 'Work from anywhere. The team is spread across six Pakistani cities.' },
   { icon: Clock,  label: 'Async-first culture', desc: 'No mandatory stand-ups. Deep work is protected.' },
   { icon: Zap,    label: '20% R&D time',        desc: 'Dedicated learning hours built into every quarter.' },
   { icon: Heart,  label: 'Top-of-market pay',   desc: 'Competitive salary + equity + full benefits.' },
@@ -222,7 +223,7 @@ function JoinUsSection() {
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
                       <h3 className="font-syne font-bold text-base" style={{ color: 'var(--text-primary)' }}>{role.title}</h3>
-                      <span className="chip text-[9px]">{role.dept}</span>
+                      <span className="chip text-[10px]">{role.dept}</span>
                     </div>
                     <p className="font-mono text-[10px] mb-2" style={{ color: 'var(--text-muted)' }}>{role.type}</p>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{role.desc}</p>

@@ -1,117 +1,54 @@
-﻿import React, { useRef } from 'react'
+import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Zap, Globe2, FlaskConical, Heart } from 'lucide-react'
+import { ArrowRight, Globe2, FlaskConical, Zap, Heart } from 'lucide-react'
 import Process from '../components/sections/Process'
+import SectionHeader from '../components/ui/SectionHeader'
+import { METRICS, format, FOUNDED, TEAM_SIZE } from '../data/metrics'
+import { TEAM } from '../data/team'
 
-const VALUES = [
-  { title:'Craft Over Speed',    desc:'We never ship things we\'re not proud of. Quality is non-negotiable, even when deadlines are tight.' },
-  { title:'Radical Transparency', desc:'No hidden blockers, no surprise timelines. You always know exactly where things stand.' },
-  { title:'Outcomes Not Outputs', desc:'We measure success by business results — not deliverables, tickets, or hours logged.' },
-  { title:'Always Learning',     desc:'Technology moves fast. We invest 20% of every quarter in R&D, experimentation, and upskilling.' },
-]
+const E = [0.22, 1, 0.36, 1]
 
+/* The founder's note is signed by whoever actually holds the role in the
+   roster — it previously credited an "Alex Chen" who appears nowhere else. */
+const FOUNDER = TEAM.find(m => m.role.includes('Founder')) ?? TEAM[0]
+
+/**
+ * Timeline for a studio founded in 2025 — roughly eighteen months of history,
+ * so these are quarters rather than years. Keep it honest: a short list of
+ * real decisions reads better than a padded decade.
+ */
 const MILESTONES = [
-  { year:'2014', event:'Founded in San Francisco with a team of 3.' },
-  { year:'2016', event:'Crossed 100 projects milestone. Opened London office.' },
-  { year:'2018', event:'Launched AI/ML practice. First Fortune 500 client.' },
-  { year:'2020', event:'Grew to 50+ team members across 4 time zones.' },
-  { year:'2022', event:'500 projects shipped. $50M+ client revenue generated.' },
-  { year:'2024', event:'Recognised as Top Digital Agency by Clutch & Forbes.' },
+  { year: 'Q1 2025', title: 'Four people, one rule',
+    event: 'Founded on a simple constraint: never take on more work than the founders can personally review.' },
+  { year: 'Q2 2025', title: 'First platform build',
+    event: 'A logistics client took a chance on a three-month-old studio. It shipped on time and they came back.' },
+  { year: 'Q3 2025', title: 'Design and engineering merge',
+    event: 'Stopped running them as separate practices. Every engagement since has had one team and no handoff.' },
+  { year: 'Q4 2025', title: 'The first refusal',
+    event: 'Turned down our largest enquiry to date because we could not staff it without hiring people we had not worked with.' },
+  { year: 'Q1 2026', title: 'AI practice opens',
+    event: 'First production ML systems shipped, for clients in fintech and logistics.' },
+  { year: 'Q2 2026', title: 'Individually bookable',
+    event: 'Opened the roster so clients can engage a single specialist by the hour, not just a whole project team.' },
 ]
 
-export default function AboutPage() {
-  return (
-    <>
-      {/* Story + Values */}
-      <section className="section pt-36" style={{ background:'var(--bg-surface)' }}>
-        <div className="container">
-          <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.6 }}
-            className="mb-14">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color:'var(--text-muted)' }}>/ 01 — Story</p>
-            <div className="flex items-end gap-6">
-              <h1 className="section-title shrink-0">Our Story</h1>
-              <div className="flex-1 h-px mb-2.5" style={{ background:'var(--border)' }} />
-              <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-                style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>01</span>
-            </div>
-          </motion.div>
+const PRINCIPLES = [
+  { n: '01', title: 'Craft over speed',
+    desc: "We do not ship things we are not prepared to put our names on. When a deadline and the quality bar collide, we renegotiate the deadline — and we tell you early enough that it is still a choice." },
+  { n: '02', title: 'Radical transparency',
+    desc: 'You see the same board we do. Blockers surface the day they appear, not in a status call two weeks later. If we are behind, you will hear it from us first.' },
+  { n: '03', title: 'Outcomes, not outputs',
+    desc: 'We measure engagements by what changed in your business, not by tickets closed or hours logged. Occasionally that means arguing you out of the thing you asked for.' },
+  { n: '04', title: 'Always learning',
+    desc: 'A fifth of every quarter is protected for R&D and upskilling. It is the reason we can still recommend the boring, proven option with a straight face.' },
+]
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
-            <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
-              <h2 className="section-title mb-6">Our <span className="text-accent">Story</span></h2>
-              <div className="space-y-4 section-sub" style={{ fontSize:'.95rem' }}>
-                <p>CodeNode was born from a simple frustration: most agencies promise premium quality and deliver average work wrapped in expensive presentations.</p>
-                <p>Our founders — engineers and designers who had worked at companies like Google, Figma, and Shopify — decided to build something different. A studio where technical excellence and design craft were equally valued, not traded off.</p>
-                <p>In our first year, we've already shipped dozens of projects, helped early-stage startups launch, and built AI experiences for ambitious teams.</p>
-                <p>We're still obsessed with the same thing we were when we started in 2024: making things that actually work, beautifully.</p>
-              </div>
-              <Link to="/contact" className="btn btn-primary mt-8">
-                Start Your Story With Us <ArrowRight className="w-4 h-4" />
-              </Link>
-            </motion.div>
-
-            {/* Timeline */}
-            <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
-              <h3 className="font-syne font-bold text-xl mb-6" style={{ color:'var(--text-primary)' }}>Milestones</h3>
-              <div className="space-y-4 relative">
-                <div className="absolute left-[18px] top-3 bottom-3 w-[1px]" style={{ background:'var(--border)' }} />
-                {MILESTONES.map(({ year, event }, i) => (
-                  <motion.div key={year} initial={{ opacity:0, x:16 }} whileInView={{ opacity:1, x:0 }}
-                    viewport={{ once:true }} transition={{ delay:i*.08 }}
-                    className="flex gap-4 items-start">
-                    <div className="w-9 h-9 rounded-full shrink-0 flex items-center justify-center z-10 relative"
-                      style={{ background:'var(--bg-card)', border:'1px solid var(--border)' }}>
-                      <div className="w-2 h-2 rounded-full" style={{ background:'var(--accent)' }} />
-                    </div>
-                    <div className="pb-2">
-                      <span className="font-mono text-xs text-accent">{year}</span>
-                      <p className="text-sm mt-0.5" style={{ color:'var(--text-secondary)' }}>{event}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Values */}
-          <div className="flex items-end gap-6 mb-3">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase shrink-0" style={{ color:'var(--text-muted)' }}>/ 02 — Values</p>
-            <div className="flex-1 h-px" style={{ background:'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>02</span>
-          </div>
-          <h2 className="section-title mb-10">Our <span className="text-accent">Values</span></h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {VALUES.map(({ title, desc }, i) => (
-              <motion.div key={title} initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
-                viewport={{ once:true }} transition={{ delay:i*.1, duration:.55 }}
-                className="card p-6">
-                <span className="font-syne font-extrabold text-4xl mb-4 block select-none"
-                  style={{ lineHeight:1, color:'transparent', WebkitTextStroke:'1.5px var(--accent)' }}>
-                  {String(i+1).padStart(2,'0')}
-                </span>
-                <h3 className="font-syne font-bold text-base mb-2" style={{ color:'var(--text-primary)' }}>{title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color:'var(--text-secondary)' }}>{desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Process />
-      <CultureSection />
-    </>
-  )
-}
-
-/* ── Culture Section ─────────────────────────────────────────────────── */
-
-const CULTURE_STATS = [
-  { icon: Globe2,       value: '100%',   label: 'Remote-first',      desc: 'Talent from 18 countries, working async-first with zero mandatory 9-to-5.' },
-  { icon: FlaskConical, value: '20%',    label: 'R&D every quarter',  desc: 'Every engineer has protected time each quarter for experimentation and learning.' },
-  { icon: Zap,          value: '<48h',   label: 'Decision speed',     desc: 'Flat hierarchy. No approval chains. The right person decides the right thing, fast.' },
-  { icon: Heart,        value: '4.9/5',  label: 'Team satisfaction',  desc: 'Measured twice a year. We publish the results publicly — good or bad.' },
+const CULTURE = [
+  { icon: Globe2,       value: '100%',  label: 'Remote-first',      desc: 'A distributed team across six Pakistani cities, async-first, no mandatory 9-to-5.' },
+  { icon: FlaskConical, value: '20%',   label: 'R&D every quarter', desc: 'Protected time each quarter for experimentation and learning.' },
+  { icon: Zap,          value: '<48h',  label: 'Decision speed',    desc: 'Flat structure, no approval chains. The right person decides, fast.' },
+  { icon: Heart,        value: '4.9/5', label: 'Team satisfaction', desc: 'Measured twice a year. We publish the result either way.' },
 ]
 
 const BELIEFS = [
@@ -123,146 +60,392 @@ const BELIEFS = [
   'Ship early, iterate publicly, improve relentlessly.',
 ]
 
-function CultureSection() {
+/* ── 01 · Opening statement ─────────────────────────────────────────── */
+function Opening() {
+  const facts = [
+    ['Founded', FOUNDED],
+    ['Team', `${TEAM_SIZE} people`],
+    ['Clients in', `${format('countries')} countries`],
+    ['Projects', format('projects')],
+  ]
+
+  return (
+    <section className="section pt-36" style={{ background: 'var(--bg-surface)', paddingBottom: '4rem' }}>
+      <div className="container">
+        <motion.p
+          initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: E }}
+          className="eyebrow mb-8"
+        >
+          <span style={{ color: 'var(--brand)' }}>01</span>
+          <span style={{ margin: '0 0.6rem', opacity: 0.4 }}>/</span>About
+        </motion.p>
+
+        {/* The statement carries the page — no competing headline above it.
+            No width cap here: the reveal wrapper's overflow:hidden clips on
+            both axes, so a narrow container silently truncates the glyphs. */}
+        <div>
+          {[
+            [{ t: 'We stayed ' }, { t: 'small', em: true }],
+            [{ t: 'on purpose.' }],
+          ].map((line, i) => (
+            <div key={i} style={{ overflow: 'hidden' }}>
+              <motion.h1
+                initial={{ y: '104%' }} animate={{ y: 0 }}
+                transition={{ delay: 0.15 + i * 0.1, duration: 0.9, ease: E }}
+                style={{
+                  fontFamily: 'var(--font-display)', fontSize: 'var(--step-6)',
+                  fontWeight: 500, lineHeight: 1.05, letterSpacing: '-0.03em',
+                  color: 'var(--text-primary)', paddingBottom: '0.06em',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {line.map((p, pi) => p.em
+                  ? <em key={pi} style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>{p.t}</em>
+                  : <span key={pi}>{p.t}</span>)}
+              </motion.h1>
+            </div>
+          ))}
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.7, ease: E }}
+          className="section-sub"
+          style={{ marginTop: '2rem', fontSize: '1.125rem', maxWidth: '52ch' }}
+        >
+          Most studios grow until the people who won the work are no longer the
+          people doing it. We decided not to — which is why there are still
+          {' '}{TEAM_SIZE} of us, and why you will meet everyone who touches your project.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.7 }}
+          className="fact-grid"
+          style={{ marginTop: '3.5rem' }}
+        >
+          {facts.map(([k, v]) => (
+            <div key={k}>
+              <p className="eyebrow" style={{ marginBottom: '0.5rem' }}>{k}</p>
+              <p className="tnum" style={{
+                fontFamily: 'var(--font-display)', fontSize: 'var(--step-2)',
+                fontWeight: 500, lineHeight: 1.1, color: 'var(--text-primary)',
+              }}>{v}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ── 02 · The story ─────────────────────────────────────────────────── */
+function Story() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  return (
+    <section ref={ref} className="section" style={{ background: 'var(--bg)' }}>
+      <div className="container">
+        <SectionHeader
+          num="02"
+          label="Story"
+          title={[{ t: 'Built to be the studio we ' }, { t: 'would have hired', em: true }]}
+          inView={inView}
+          className="mb-12"
+        />
+
+        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-12 xl:gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: E }}
+            className="dropcap prose-measure"
+          >
+            <p>
+              CodeNode began in 2025 with a frustration our founders kept running
+              into from the client side: agencies that promised premium work and
+              delivered something average, wrapped in an expensive presentation. The
+              people in the pitch were rarely the people who showed up afterwards.
+            </p>
+            <p>
+              They had spent their careers at companies where design and engineering
+              sat in different buildings and shipped through a translation layer —
+              and had watched what that costs in revisions, misunderstandings and
+              quietly abandoned detail. So the studio was built with one team from
+              the start. The person who draws it is the person who builds it.
+            </p>
+
+            <motion.blockquote
+              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.35, duration: 0.7 }}
+              className="pull-quote"
+              style={{ margin: '2.5rem 0' }}
+            >
+              Growth was never the goal. Being the studio we would have hired was.
+            </motion.blockquote>
+
+            <p>
+              That constraint shapes everything downstream. We deliberately take on
+              fewer engagements than we could fill, because every one is reviewed by
+              someone senior end to end. We turn work down when we cannot staff it
+              properly. And we say so early when a plan stops being the right one,
+              which is not always the comfortable conversation.
+            </p>
+            <p>
+              We are early, and we would rather say so than pretend otherwise. What
+              has not moved since day one is the thing we are obsessive about: making
+              things that genuinely work, and that hold up two years after launch.
+            </p>
+
+            <Link to="/contact" className="btn btn-primary micro-click" style={{ marginTop: '2rem' }}>
+              Start a project <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* Timeline */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.7, ease: E }}
+          >
+            <p className="eyebrow mb-6">Milestones</p>
+            <div style={{ position: 'relative' }}>
+              <div style={{
+                position: 'absolute', left: '2.65rem', top: '0.6rem', bottom: '0.6rem',
+                width: 1, background: 'var(--divider)',
+              }} />
+              {MILESTONES.map((m, i) => (
+                <motion.div
+                  key={m.year}
+                  initial={{ opacity: 0, x: 14 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.08, duration: 0.5, ease: E }}
+                  className="flex gap-5"
+                  style={{ paddingBottom: i < MILESTONES.length - 1 ? '1.75rem' : 0 }}
+                >
+                  <span className="tnum shrink-0" style={{
+                    fontFamily: 'var(--font-display)', fontSize: '1.0625rem', fontWeight: 500,
+                    color: 'var(--brand)', width: '2.1rem', lineHeight: 1.35,
+                  }}>{m.year}</span>
+
+                  <span className="shrink-0" style={{
+                    width: 9, height: 9, borderRadius: '50%', marginTop: '0.42rem',
+                    background: 'var(--bg)', border: '1.5px solid var(--brand)', zIndex: 1,
+                  }} />
+
+                  <div>
+                    <p style={{ fontSize: '0.9375rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                      {m.title}
+                    </p>
+                    <p style={{ fontSize: '0.8125rem', lineHeight: 1.65, color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                      {m.event}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── 03 · Principles ────────────────────────────────────────────────── */
+function Principles() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  return (
+    <section ref={ref} className="section" style={{ background: 'var(--bg-surface)' }}>
+      <div className="container">
+        <SectionHeader
+          num="03"
+          label="Principles"
+          title={[{ t: 'Four rules we have ' }, { t: 'never traded away', em: true }]}
+          inView={inView}
+          className="mb-12"
+        />
+
+        <div style={{ borderTop: '1px solid var(--divider)' }}>
+          {PRINCIPLES.map((p, i) => (
+            <motion.div
+              key={p.n}
+              initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.09, duration: 0.6, ease: E }}
+              className="grid md:grid-cols-[5rem_1fr] lg:grid-cols-[7rem_22rem_1fr] gap-x-6 gap-y-2"
+              style={{ padding: '2rem 0', borderBottom: '1px solid var(--divider)' }}
+            >
+              <span className="tnum" style={{
+                fontFamily: 'var(--font-display)', fontSize: 'var(--step-2)', fontWeight: 500,
+                color: 'var(--brand)', lineHeight: 1,
+              }}>{p.n}</span>
+
+              <h3 style={{
+                fontFamily: 'var(--font-display)', fontSize: 'var(--step-1)', fontWeight: 500,
+                letterSpacing: '-0.015em', color: 'var(--text-primary)', lineHeight: 1.25,
+              }}>{p.title}</h3>
+
+              <p style={{ fontSize: '0.9375rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '60ch' }}>
+                {p.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── 05 · Culture ───────────────────────────────────────────────────── */
+function Culture() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section ref={ref} className="section" style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)' }}>
       <div className="container">
+        <SectionHeader
+          num="05"
+          label="Culture"
+          title={[{ t: 'What we do when ' }, { t: 'no one is watching', em: true }]}
+          subtitle="Culture is not a perk list. It is the sum of the decisions nobody is around to see."
+          inView={inView}
+          className="mb-12"
+        />
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: '4rem' }}
-        >
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 04 — Culture</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">How We're Wired</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>04</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            Culture isn't a perk list. It's the sum of every decision we make when no one is watching.
-          </p>
-        </motion.div>
-
-        {/* Stats grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {CULTURE_STATS.map(({ icon: Icon, value, label, desc }, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+          {CULTURE.map(({ icon: Icon, value, label, desc }, i) => (
             <motion.div
               key={label}
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="group card p-6 relative overflow-hidden"
-              style={{ borderRadius: 18 }}
+              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.09, duration: 0.6, ease: E }}
+              className="card" style={{ padding: '1.5rem' }}
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[18px]"
-                style={{ background: 'radial-gradient(circle at 0% 0%, var(--accent-glow) 0%, transparent 65%)' }} />
-
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
-                    <Icon className="w-4 h-4 text-accent" />
-                  </div>
-                  <span className="font-syne font-extrabold select-none"
-                    style={{ fontSize: '2.5rem', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)' }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                <p style={{
-                  fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 800,
-                  fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', lineHeight: 1, letterSpacing: '-0.03em',
-                  color: 'var(--text-primary)', marginBottom: '0.25rem',
-                }}>{value}</p>
-                <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.875rem' }}>
-                  {label}
-                </p>
-                <div style={{ height: '1px', background: 'var(--border)', marginBottom: '0.875rem' }} />
-                <p style={{ fontSize: '0.8rem', lineHeight: 1.7, color: 'var(--text-secondary)' }}>{desc}</p>
+              <div className="flex items-center justify-center mb-5" style={{
+                width: 36, height: 36, borderRadius: 'var(--r-sm)',
+                background: 'var(--bg-surface)', border: '1px solid var(--border)',
+              }}>
+                <Icon className="w-4 h-4" style={{ color: 'var(--brand)' }} />
               </div>
+
+              <p className="tnum" style={{
+                fontFamily: 'var(--font-display)', fontWeight: 500,
+                fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', lineHeight: 1,
+                letterSpacing: '-0.025em', color: 'var(--text-primary)', marginBottom: '0.4rem',
+              }}>{value}</p>
+              <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>{label}</p>
+              <hr className="rule" style={{ marginBottom: '0.875rem' }} />
+              <p style={{ fontSize: '0.8125rem', lineHeight: 1.7, color: 'var(--text-secondary)' }}>{desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Founder quote + beliefs */}
         <div className="grid lg:grid-cols-[1fr_1fr] gap-8">
-
-          {/* Quote */}
+          {/* Founder's note — signed by the person who actually holds the role */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="card p-8 flex flex-col justify-between"
-            style={{ borderRadius: 20, borderLeft: '3px solid var(--accent)' }}
+            initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.25, duration: 0.7, ease: E }}
+            className="card flex flex-col justify-between"
+            style={{ padding: '2rem', borderLeft: '2px solid var(--brand)' }}
           >
             <div>
-              <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-                / Founder's Note
-              </p>
-              <blockquote style={{
-                fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 600,
-                fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', lineHeight: 1.55,
-                color: 'var(--text-primary)', marginBottom: '2rem',
-              }}>
-                "We didn't set out to build the biggest agency. We set out to build the one we would have hired — obsessive about craft, honest about timelines, and allergic to mediocrity."
+              <p className="eyebrow mb-6">Founder's note</p>
+              <blockquote className="pull-quote" style={{ marginBottom: '2rem' }}>
+                We didn't set out to build the biggest studio. We set out to build the
+                one we would have hired — obsessive about craft, honest about
+                timelines, allergic to mediocrity.
               </blockquote>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-              <div style={{
-                width: '2.5rem', height: '2.5rem', borderRadius: '50%',
-                background: 'var(--bg-surface)', border: '1px solid var(--border)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 800, fontSize: '0.85rem',
-                color: 'var(--text-primary)',
-              }}>A</div>
+
+            <Link to={`/team/${FOUNDER.slug}`} className="flex items-center gap-3.5">
+              <img src={FOUNDER.img} alt="" style={{
+                width: 42, height: 42, borderRadius: '50%',
+                objectFit: 'cover', objectPosition: 'top',
+              }} />
               <div>
-                <p style={{ fontFamily: 'Syne, Montserrat, sans-serif', fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-primary)', margin: 0 }}>Alex Chen</p>
-                <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', color: 'var(--text-muted)', marginTop: '0.1rem' }}>Co-founder & CEO</p>
+                <p style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
+                  {FOUNDER.name}
+                </p>
+                <p className="eyebrow" style={{ fontSize: '0.625rem', marginTop: '0.15rem' }}>{FOUNDER.role}</p>
               </div>
-            </div>
+            </Link>
           </motion.div>
 
           {/* Beliefs */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.35, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.7, ease: E }}
           >
-            <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-              / Things We Actually Believe
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <p className="eyebrow mb-5">Things we actually believe</p>
+            <div>
               {BELIEFS.map((b, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.4 + i * 0.07, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  className="group flex items-start gap-4 py-3.5"
-                  style={{ borderBottom: i < BELIEFS.length - 1 ? '1px solid var(--border)' : 'none', cursor: 'default' }}
+                  initial={{ opacity: 0, x: 14 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.35 + i * 0.06, duration: 0.45, ease: E }}
+                  className="flex items-baseline gap-4"
+                  style={{ padding: '0.875rem 0', borderBottom: i < BELIEFS.length - 1 ? '1px solid var(--divider)' : 'none' }}
                 >
-                  <span style={{
-                    fontFamily: 'JetBrains Mono, monospace', fontSize: '0.58rem', letterSpacing: '0.1em',
-                    color: 'var(--text-muted)', paddingTop: '0.2rem', flexShrink: 0, width: '1.5rem',
-                  }}>{String(i + 1).padStart(2, '0')}</span>
-                  <p style={{
-                    fontSize: '0.88rem', lineHeight: 1.6,
-                    color: 'var(--text-secondary)', margin: 0,
-                    transition: 'color 0.2s',
-                  }} className="group-hover:text-[var(--text-primary)]">{b}</p>
+                  <span className="eyebrow shrink-0" style={{ width: '1.5rem', fontSize: '0.625rem' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'var(--text-secondary)' }}>{b}</p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
-
         </div>
-
       </div>
     </section>
+  )
+}
+
+/* ── 06 · Close ─────────────────────────────────────────────────────── */
+function Close() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  return (
+    <section ref={ref} className="section" style={{ background: 'var(--bg)' }}>
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: E }}
+          className="text-center"
+          style={{ maxWidth: '46rem', margin: '0 auto' }}
+        >
+          <p className="eyebrow mb-5">Next step</p>
+          <h2 style={{
+            fontFamily: 'var(--font-display)', fontSize: 'var(--step-4)', fontWeight: 500,
+            lineHeight: 1.08, letterSpacing: '-0.025em', color: 'var(--text-primary)', textWrap: 'balance',
+          }}>
+            If that sounds like the studio you'd hire,
+            {' '}<em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>let's talk</em>
+          </h2>
+          <p className="section-sub" style={{ margin: '1.25rem auto 0' }}>
+            A short discovery call, an honest scope, and a milestone plan before anyone signs anything.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center" style={{ marginTop: '2rem' }}>
+            <Link to="/contact" className="btn btn-primary micro-click">
+              Start a project <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/team" className="btn btn-secondary">Meet the team</Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default function AboutPage() {
+  return (
+    <>
+      <Opening />     {/* 01 */}
+      <Story />       {/* 02 */}
+      <Principles />  {/* 03 */}
+      <Process num="04" />
+      <Culture />     {/* 05 */}
+      <Close />
+    </>
   )
 }

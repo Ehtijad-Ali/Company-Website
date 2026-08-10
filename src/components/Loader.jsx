@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import CodeNodeLogo from './CodeNodeLogo'
 
 const EASE = 'cubic-bezier(0.76, 0, 0.24, 1)'
 
@@ -117,26 +118,18 @@ export default function Loader({ done }) {
         pointerEvents: 'none',
       }}>
 
-        {/* Logo mark */}
+        {/* The real wordmark — same component the navbar and footer render, so
+            the first thing a visitor sees is the actual brand rather than a
+            placeholder chevron and a text approximation of the name. */}
         <div style={{
-          width: 52, height: 52, borderRadius: 'var(--r-md)', marginBottom: 22,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'var(--brand)',
+          marginBottom: 18,
+          opacity: isIn ? 1 : 0,
+          transform: isIn ? 'translateY(0)' : 'translateY(8px)',
+          transition: 'opacity 0.7s ease 0.1s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s',
+          maxWidth: 'calc(100vw - 3rem)',
         }}>
-          <svg viewBox="0 0 24 24" style={{ width: 20, height: 20, stroke: 'var(--text-on-brand)', strokeWidth: 2.25 }}
-               fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="16 18 22 12 16 6" />
-            <polyline points="8 6 2 12 8 18" />
-          </svg>
+          <CodeNodeLogo height={46} />
         </div>
-
-        <h1 style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 500, fontSize: '2rem', letterSpacing: '-0.025em',
-          color: 'var(--text-primary)', margin: '0 0 6px',
-        }}>
-          Code<em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>Node</em>
-        </h1>
 
         <p style={{
           fontFamily: 'var(--font-mono)',

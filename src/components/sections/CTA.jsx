@@ -96,14 +96,14 @@ export default function CTA() {
                   <p className="tnum" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--step-2)', fontWeight: 500, lineHeight: 1, color: 'var(--text-primary)' }}>
                     {openNow}
                   </p>
-                  <p className="eyebrow mt-1.5" style={{ fontSize: '0.5625rem' }}>Available now</p>
+                  <p className="eyebrow mt-1.5" style={{ fontSize: '0.625rem' }}>Available now</p>
                 </div>
                 <div style={{ width: 1, height: 32, background: 'var(--divider)' }} />
                 <div>
                   <p className="tnum" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--step-2)', fontWeight: 500, lineHeight: 1, color: 'var(--text-primary)' }}>
                     {formatRate(lowestRate)}
                   </p>
-                  <p className="eyebrow mt-1.5" style={{ fontSize: '0.5625rem' }}>Starting rate / hr</p>
+                  <p className="eyebrow mt-1.5" style={{ fontSize: '0.625rem' }}>Starting rate / hr</p>
                 </div>
               </div>
 

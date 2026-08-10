@@ -82,7 +82,7 @@ export default function FAQ() {
         />
         <p className="text-sm mb-12" style={{ color: 'var(--text-secondary)' }}>
           Still have questions?{' '}
-          <button onClick={openContact} className="underline underline-offset-2"
+          <button onClick={openContact} className="tap underline underline-offset-2"
             style={{ color: 'var(--brand)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontWeight: 500 }}>
             Let's talk
           </button>

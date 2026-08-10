@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion, useInView } from 'framer-motion'
+import SectionHeader from '../components/ui/SectionHeader'
 import { Link } from 'react-router-dom'
 import {
   Code2, Palette, Brain, Smartphone, BarChart3, Cloud, Shield, Zap,
@@ -42,15 +43,22 @@ export default function ServicesPage() {
       {/* Services grid */}
       <section className="section pt-36" style={{ background:'var(--bg-surface)' }}>
         <div className="container">
-          <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.6 }}
-            className="mb-14">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color:'var(--text-muted)' }}>/ 01 — Services</p>
-            <div className="flex items-end gap-6">
-              <h1 className="section-title shrink-0">What We Offer</h1>
-              <div className="flex-1 h-px mb-2.5" style={{ background:'var(--border)' }} />
-              <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-                style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>01</span>
-            </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="mb-12">
+            <p className="eyebrow mb-3">
+              <span style={{ color: 'var(--brand)' }}>01</span>
+              <span style={{ margin: '0 0.6rem', opacity: 0.4 }}>/</span>Services
+            </p>
+            <h1 style={{
+              fontFamily: 'var(--font-display)', fontSize: 'var(--step-5)', fontWeight: 500,
+              lineHeight: 1.05, letterSpacing: '-0.028em', color: 'var(--text-primary)',
+            }}>
+              Eight disciplines you can <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--brand)' }}>buy separately</em>
+            </h1>
+            <p className="section-sub mt-4">
+              Each one is a standalone engagement. Most projects combine two or three —
+              we'll tell you which after a discovery call, including when the answer is "fewer".
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -72,7 +80,8 @@ export default function ServicesPage() {
                       </div>
                       <span className="chip text-[10px]">{s.price}</span>
                     </div>
-                    <h3 className="font-syne font-bold text-xl mb-3" style={{ color:'var(--text-primary)' }}>{s.title}</h3>
+                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.375rem',
+                                 letterSpacing: '-0.015em', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>{s.title}</h3>
                     <p className="text-sm leading-relaxed mb-6" style={{ color:'var(--text-secondary)' }}>{s.desc}</p>
                     <div className="grid grid-cols-2 gap-2 mb-6">
                       {s.features.map(f => (
@@ -82,7 +91,7 @@ export default function ServicesPage() {
                         </div>
                       ))}
                     </div>
-                    <button onClick={openContact} className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all" style={{ color:'var(--accent)', background:'none', border:'none', cursor:'pointer', padding:0, textDecoration:'underline', textUnderlineOffset:'4px' }}>
+                    <button onClick={openContact} className="tap inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all" style={{ color:'var(--accent)', background:'none', border:'none', cursor:'pointer', padding:0, textDecoration:'underline', textUnderlineOffset:'4px' }}>
                       Get a quote <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
@@ -105,7 +114,7 @@ const WHY_US = [
   { icon: Rocket,       stat: '3×',   color: 'var(--brand)', title: 'Faster Time-to-Market',   desc: 'Our battle-tested sprint framework cuts typical agency timelines by two-thirds — without skipping a single quality gate.' },
   { icon: Lock,         stat: '100%', color: 'var(--brand)', title: 'IP Fully Owned by You',    desc: 'Every line of code and asset belongs to you from day one. We sign an IP assignment clause in every contract — no exceptions.' },
   { icon: Headphones,   stat: '24/7', color: 'var(--brand)', title: 'Always-On Support',        desc: 'Real humans, fast responses, zero ticket limbo. Your dedicated team is one Slack message away, around the clock.' },
-  { icon: Trophy,       stat: '98%',  color: 'var(--brand)', title: 'Client Satisfaction',      desc: 'Backed by reviews from 200+ clients worldwide. We don\'t just ship products — we build long-term partnerships.' },
+  { icon: Trophy,       stat: '98%',  color: 'var(--brand)', title: 'Client Satisfaction',      desc: 'Measured after every engagement, not cherry-picked. Most clients come back for a second project.' },
 ]
 
 function WhyUsSection() {
@@ -116,21 +125,13 @@ function WhyUsSection() {
     <section ref={ref} className="section" style={{ background: 'var(--bg)' }}>
       <div className="absolute top-0 inset-x-0 h-[1px]" style={{ background: 'var(--border)' }} />
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }} className="mb-14"
-        >
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 02 — Advantage</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">Why Choose Us</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize: 'clamp(3.5rem,6vw,6rem)', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em' }}>02</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            We're not just another agency. Here's what makes every engagement with us genuinely different.
-          </p>
-        </motion.div>
+          <SectionHeader
+            num="02"
+            label="Advantage"
+            title={[{ t: 'Why teams keep ' }, { t: 'coming back', em: true }]}
+            inView={inView}
+            className="mb-12"
+          />
 
         <div className="grid sm:grid-cols-2 gap-5">
           {WHY_US.map((item, i) => {
@@ -151,7 +152,8 @@ function WhyUsSection() {
                       style={{ background: `${item.color}18`, border: `1px solid ${item.color}30` }}>
                       <Icon className="w-5 h-5" style={{ color: item.color }} />
                     </div>
-                    <span className="font-syne font-extrabold text-4xl" style={{ color: item.color }}>{item.stat}</span>
+                    <span className="tnum" style={{ fontFamily: 'var(--font-display)', fontWeight: 500,
+                                 fontSize: '2.25rem', letterSpacing: '-0.025em', color: item.color }}>{item.stat}</span>
                   </div>
                   <h3 className="font-syne font-bold text-xl mb-3" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{item.desc}</p>
@@ -180,18 +182,14 @@ function GuaranteeSection() {
     <section ref={ref} className="section" style={{ background: 'var(--bg-surface)' }}>
       <div className="absolute top-0 inset-x-0 h-[1px]" style={{ background: 'var(--border)' }} />
       <div className="container">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-14">
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 03 — Promise</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">Built on Guarantees</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize:'clamp(3.5rem,6vw,6rem)', lineHeight:1, color:'transparent', WebkitTextStroke:'1px var(--ghost-stroke)', letterSpacing:'-0.04em' }}>03</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            Vague promises are easy. We make specific, measurable commitments — and back them up.
-          </p>
-        </motion.div>
+          <SectionHeader
+            num="03"
+            label="Promise"
+            title={[{ t: 'Commitments, ' }, { t: 'not assurances', em: true }]}
+            subtitle="Vague promises are easy. These are specific and measurable, and we back them."
+            inView={inView}
+            className="mb-12"
+          />
         <div className="grid sm:grid-cols-2 gap-5">
           {GUARANTEES.map((g, i) => {
             const Icon = g.icon
@@ -209,14 +207,15 @@ function GuaranteeSection() {
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
                       <Icon className="w-5 h-5 text-accent" />
                     </div>
-                    <span className="font-syne font-extrabold select-none"
-                      style={{ fontSize: '3rem', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)' }}>
+                    <span className="tnum select-none"
+                      style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '2.5rem',
+                               lineHeight: 1, color: 'var(--brand)', opacity: 0.35 }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="font-syne font-extrabold text-4xl" style={{ color: 'var(--text-primary)' }}>{g.stat}</span>
-                    <span className="font-mono text-[9px] tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>{g.statSub}</span>
+                    <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>{g.statSub}</span>
                   </div>
                   <div className="h-px my-4" style={{ background: 'var(--border)' }} />
                   <h3 className="font-syne font-bold text-lg mb-2" style={{ color: 'var(--text-primary)' }}>{g.title}</h3>
@@ -258,18 +257,14 @@ function TechStackSection() {
   return (
     <section ref={ref} className="section" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
       <div className="container">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-14">
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-muted)' }}>/ 04 — Stack</p>
-          <div className="flex items-end gap-6">
-            <h2 className="section-title shrink-0">Technologies We Master</h2>
-            <div className="flex-1 h-px mb-2.5" style={{ background: 'var(--border)' }} />
-            <span className="font-syne font-extrabold hidden lg:block shrink-0 select-none"
-              style={{ fontSize: 'clamp(3.5rem,6vw,6rem)', lineHeight: 1, color: 'transparent', WebkitTextStroke: '1px var(--ghost-stroke)', letterSpacing: '-0.04em' }}>04</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            We pick the right tool for each job. Here are the technologies at the core of everything we build.
-          </p>
-        </motion.div>
+          <SectionHeader
+            num="04"
+            label="Stack"
+            title={[{ t: 'The tools behind ' }, { t: 'the work', em: true }]}
+            subtitle="We pick per problem rather than per résumé. These are the ones we reach for most."
+            inView={inView}
+            className="mb-12"
+          />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {TECH.map((t, i) => (
@@ -287,7 +282,7 @@ function TechStackSection() {
               </div>
               <div className="relative z-10">
                 <p className="font-syne font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
-                <p className="font-mono text-[9px] tracking-widest uppercase mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.cat}</p>
+                <p className="font-mono text-[10px] tracking-widest uppercase mt-0.5" style={{ color: 'var(--text-muted)' }}>{t.cat}</p>
               </div>
             </motion.div>
           ))}

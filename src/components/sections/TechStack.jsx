@@ -91,7 +91,7 @@ export default function TechStack() {
                       {t.name.slice(0,2).toUpperCase()}
                     </div>
                     <p className="text-xs font-semibold" style={{ color:'var(--text-primary)' }}>{t.name}</p>
-                    <p className="font-mono text-[9px] mt-1" style={{ color:'var(--text-secondary)' }}>{t.cat}</p>
+                    <p className="font-mono text-[10px] mt-1" style={{ color:'var(--text-secondary)' }}>{t.cat}</p>
                   </motion.div>
                 ))}
               </AnimatePresence>

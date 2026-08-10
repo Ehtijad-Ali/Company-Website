@@ -156,7 +156,7 @@ export default function About() {
                   className="flex items-baseline gap-4 py-3"
                   style={{ borderBottom: '1px solid var(--divider)' }}
                 >
-                  <span className="eyebrow shrink-0" style={{ width: '1.6rem', fontSize: '0.5625rem' }}>{p.n}</span>
+                  <span className="eyebrow shrink-0" style={{ width: '1.6rem', fontSize: '0.625rem' }}>{p.n}</span>
                   <div>
                     <p style={{ fontSize: '0.9375rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.4 }}>
                       {p.title}

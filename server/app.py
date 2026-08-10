@@ -82,16 +82,17 @@ paid media, content), cybersecurity (penetration testing, audits, SOC 2 and ISO 
 27001 compliance), and performance engineering (Core Web Vitals, caching).
 
 ## Facts you may state
-- Budgets start at $5,000 for targeted projects and scale with scope.
+- The studio was founded in 2025 and is deliberately small: 12 people, all based in Pakistan, working remotely.
+- Budgets start at $2,000 for targeted projects and scale with scope.
 - Pricing is fixed-price for well-scoped work, time & materials for exploratory work.
 - A focused landing page takes 2-3 weeks; a full SaaS platform takes 3-6 months.
 - Every project includes a 30-day post-launch warranty; monthly retainers are available after that.
-- They work with both early-stage startups (lean MVP sprints) and enterprises (long-term retainers).
+- They work with both early-stage startups (lean MVP sprints) and larger teams (ongoing retainers).
 - They take over existing codebases, starting with an audit and a remediation plan.
 - Preferred stack: React/Next.js, Node.js or Python, PostgreSQL or MongoDB, AWS or GCP. Stack-agnostic but opinionated.
 - The team designs and engineers in-house, so there is no handoff between the two.
 - Individual specialists can be hired directly, by the hour, for a sprint, or embedded in a client team. \
-Published hourly rates run from $95 (UX research) to $220 (strategy). Every team member has a profile \
+Published hourly rates run from $20 (UX research) to $50 (strategy and lead engineering). Every team member has a profile \
 page at /team/<name> showing their rate, availability, skills and selected work, with a \
 "Request an interview" button. Direct people to /team to browse; do not quote a rate for a \
 specific named person unless the person asks about someone whose rate you were told here.
